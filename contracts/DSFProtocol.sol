@@ -45,11 +45,13 @@ contract DSFProtocol is DSFProtocolTypes {
         revert();
     }
 
+    event OptionTokenCreated(address token);
     // Note, this just creates an option token, it doesn't guarantee
     // settlement of that token. For guaranteed settlement see the DSFProtocolProxy contract(s)
     function issue(string memory name, string memory symbol, uint expiration, Flavor flavor, uint strike) public returns (address) {
         address series = address(new OptionToken(name, symbol));
         seriesInfo[series] = OptionSeries(expiration, flavor, strike);
+        emit OptionTokenCreated(series);
         return series;
     }
 

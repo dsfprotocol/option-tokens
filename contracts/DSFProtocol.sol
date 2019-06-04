@@ -59,8 +59,6 @@ contract DSFProtocol is DSFProtocolTypes {
         OptionSeries memory series = seriesInfo[_series];
         require(now < series.expiration);
 
-        VariableSupplyToken(_series).grant(msg.sender, amount);
-
         if (series.flavor == Flavor.Call) {
             require(msg.value == amount);
         } else {
@@ -71,6 +69,8 @@ contract DSFProtocol is DSFProtocolTypes {
             require(usdERC20.transferFrom(msg.sender, address(this), escrow));
         }
         
+        VariableSupplyToken(_series).grant(msg.sender, amount);
+
         openInterest[_series] += amount;
         totalInterest[_series] += amount;
         writers[_series][msg.sender] += amount;
@@ -140,7 +140,7 @@ contract DSFProtocol is DSFProtocolTypes {
         require(now < start + DURATION);
 
         uint elapsed = now - start;
-        
+
         // amount is upper-bounded to open interest of series
         amount = _min(amount, openInterest[_series]);
 

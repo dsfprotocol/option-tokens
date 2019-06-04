@@ -7,7 +7,7 @@ let expiration = moment().add(3, 'weeks')
 const strike = toEth('300')
 const call = 0, put = 1
 
-contract.only('Protocol', accounts => {
+contract('Protocol', accounts => {
     let protocol
     let optionToken
 

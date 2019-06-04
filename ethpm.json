@@ -1,0 +1,16 @@
+{
+    "package_name": "dsf-protocol",
+    "version": "1.0.0",
+    "description": "Financial contracts with guaranteed decentralized settlement.",
+    "authors": [
+      "Brian Wheeler <brian@dsfprotocol.com>"
+    ],
+    "keywords": [
+      "ethereum",
+      "derivatives",
+      "options"
+    ],
+    "dependencies": {
+    },
+    "license": "MIT"
+}

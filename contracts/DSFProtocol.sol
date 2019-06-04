@@ -208,7 +208,7 @@ contract DSFProtocol is DSFProtocolTypes {
         );
     }
 
-    function redeem(address _series) public returns (bool) {
+    function redeem(address _series) public returns (uint eth, uint usd) {
         OptionSeries memory series = seriesInfo[_series];
 
         require(now > series.expiration + DURATION);
@@ -218,34 +218,35 @@ contract DSFProtocol is DSFProtocolTypes {
         uint owed;
 
         if (series.flavor == Flavor.Call) {
-            owed = writers[_series][msg.sender] * unsettledPercent / 1 ether;
-            if (owed > 0) {
+            eth = writers[_series][msg.sender] * unsettledPercent / 1 ether;
+
+            if (eth > 0) {
                 msg.sender.transfer(owed);
             }
 
-            owed = writers[_series][msg.sender] * exercisedPercent / 1 ether;
-            owed = owed * series.strike / 1 ether;
-            if (owed > 0) {
+            usd = writers[_series][msg.sender] * exercisedPercent / 1 ether;
+            usd = usd * series.strike / 1 ether;
+            if (usd > 0) {
                 usdERC20.transfer(msg.sender, owed);
             }
         } else {
-            owed = writers[_series][msg.sender] * unsettledPercent / 1 ether;
-            owed = owed * series.strike / 1 ether;
-            if (owed > 0) {
-                usdERC20.transfer(msg.sender, owed);
+            usd = writers[_series][msg.sender] * unsettledPercent / 1 ether;
+            usd = usd * series.strike / 1 ether;
+            if (usd > 0) {
+                usdERC20.transfer(msg.sender, usd);
             }
 
-            owed = writers[_series][msg.sender] * exercisedPercent / 1 ether;
-            if (owed > 0) {
-                msg.sender.transfer(owed);
+            eth = writers[_series][msg.sender] * exercisedPercent / 1 ether;
+            if (eth > 0) {
+                msg.sender.transfer(eth);
             }
         }
 
         writers[_series][msg.sender] = 0;
-        return true;
+        return (eth, usd);
     }
 
-    function settle(address _series) public returns (bool) {
+    function settle(address _series) public returns (uint usd) {
         OptionSeries memory series = seriesInfo[_series];
         require(now > series.expiration + DURATION);
 
@@ -253,9 +254,9 @@ contract DSFProtocol is DSFProtocolTypes {
         VariableSupplyToken(_series).burn(msg.sender, bal);
 
         uint percent = bal * 1 ether / (totalInterest[_series] - earlyExercised[_series]);
-        uint owed = holdersSettlement[_series] * percent / 1 ether;
-        usdERC20.transfer(msg.sender, owed);
-        return true;
+        uint usd = holdersSettlement[_series] * percent / 1 ether;
+        usdERC20.transfer(msg.sender, usd);
+        return usd;
     }
     
     // map preference to a discount factor between 0.95 and 1

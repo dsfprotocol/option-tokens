@@ -26,6 +26,8 @@ let brian, chris
 
 let protocol, usdMock
 
+const MAX_DISCOUNT = 0.950583588746887319
+
 contract.only('DSFProtocol', accounts => {
 
     [brian, chris] = accounts
@@ -77,7 +79,6 @@ contract.only('DSFProtocol', accounts => {
             ])
         })
         .then(result => {
-            console.log(result)
             call.address = result[0].logs[0].args.token
             call.token = ERC20.at(call.address)
             put.address = result[1].logs[0].args.token
@@ -96,13 +97,23 @@ contract.only('DSFProtocol', accounts => {
     describe('timePreference', () => {
         it('applies a time preference to token holders', () => {
             return Promise.all([
-                protocol._timePreference(brian),
-                protocol._timePreference(chris)
+                protocol.preference(brian),
+                protocol.preference(chris)
             ])
             .mapWei(values => {
                 expect(values).to.eql([
-                    '1.798e-15',
+                    '1',
                     '0'
+                ])
+                return Promise.all([
+                    protocol.discount(brian),
+                    protocol.discount(chris)
+                ])
+            })
+            .mapWei(values => {
+                expect(values).to.eql([
+                    '0.950583588746887319',
+                    '1'
                 ])
             })
         })
@@ -116,42 +127,43 @@ contract.only('DSFProtocol', accounts => {
             before(() => {
                 return utils.getBlock()
                 .then(block => {
-                    let i = call.expiration.toPrecision() - (block.timestamp + 12*3600) + 1
+                    const timeTillExpiration = call.expiration - block.timestamp
+                    let i = timeTillExpiration + 1
                     return utils.timeTravel(i)
                 })
             })
 
-            it('call starts at price = Infinity', () => {
+            it.only('call starts at price ~ Infinity', () => {
                 let usdWas, ethWas, tx, paid
                 return _balances(brian)
                 .then(balances => {
                     [ethWas, usdWas] = balances
-
-                    return protocol.bid(call.address, 1, { from: brian, gas: 500000 })
+                    return protocol.bid(call.address, 1, { from: brian, gas: 500000, gasPrice: 0 })
                 })
-                .receipt(_tx => {
-                    tx = _tx
+                .then(result => {
+                    tx = result.receipt
                     return _balances(brian)
                 })
                 .then(balances => {
                     const [ethIs, usdIs] = balances
                     return utils.getBlock()
                     .then(block => {
-                        let elapsed = block.timestamp + TIME_PREF - (call.expiration - 43200)
-                        let expectedPrice = (86400 * 200) / elapsed;
-
+                        const { timestamp } = block
+                        const auctionDuration = 12 * 3600
+                        const elapsed = timestamp - call.expiration
+                        const expectedPrice = MAX_DISCOUNT * auctionDuration * web3.utils.fromWei(call.strike) / elapsed
                         let actualPrice = usdWas.sub(usdIs) - 0
-                        expect(actualPrice).to.be.closeTo(expectedPrice, 1)
+                        expect(actualPrice).to.closeTo(expectedPrice - 0, 10)
                         paid = usdWas.sub(usdIs) - 0
-                        expect(paid).to.eq(actualPrice)
-                        expect(ethIs.sub(ethWas).add(tx.gasUsed) - 0).to.eq(1)
+
+                        expect(ethIs.sub(ethWas) - 0).to.eq(1)
                     })
                 })
                 .then(() => {
                     return protocol.holdersSettlement(call.address)
                 })
                 .then(settlement => {
-                    expect(settlement - 0).to.eq(paid - 200)
+                    expect(settlement - 0).to.eq(paid - web3.utils.fromWei(call.strike))
                 })
             })
 

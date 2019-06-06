@@ -254,7 +254,7 @@ contract DSFProtocol is DSFProtocolTypes {
         VariableSupplyToken(_series).burn(msg.sender, bal);
 
         uint percent = bal * 1 ether / (totalInterest[_series] - earlyExercised[_series]);
-        uint usd = holdersSettlement[_series] * percent / 1 ether;
+        usd = holdersSettlement[_series] * percent / 1 ether;
         usdERC20.transfer(msg.sender, usd);
         return usd;
     }

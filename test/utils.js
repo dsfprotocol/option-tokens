@@ -22,7 +22,7 @@ Promise.prototype.receipt = function(next) {
 Promise.prototype.mapWei = function(next) {
     return this.then(values => {
         let eth = _.map(values, value => {
-            return web3.fromWei(value).toPrecision()
+            return web3.utils.fromWei(value)
         })
 
         return next(eth)
@@ -95,7 +95,7 @@ module.exports.getBlock = function() {
 module.exports.getBalance = function(address) {
     return new Promise((resolve, reject) => {
         web3.eth.getBalance(address, (err, data) => {
-            resolve(data)
+            resolve(web3.utils.toBN(data))
         })
     })
 }

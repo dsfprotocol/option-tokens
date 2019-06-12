@@ -7,6 +7,7 @@ const { expect } = require('chai')
 const _ = require('lodash')
 
 const utils = require('./utils')
+const { asFixed } = utils
 
 const expiration = moment().add(1, 'day')
 const strike = web3.utils.toWei('100')
@@ -20,6 +21,12 @@ let call = {
     flavor: 1,
     strike
 }
+
+const txOpts = {
+    gas: 500000,
+    gasPrice: 0
+}
+
 let snapshot
 
 let brian, chris
@@ -27,6 +34,8 @@ let brian, chris
 let protocol, usdMock
 
 const MAX_DISCOUNT = 0.950583588746887319
+const AUCTION_DURATION = 12 * 3600
+const TEST_STRIKE_PRICE = web3.utils.fromWei(strike)
 
 contract.only('DSFProtocol', accounts => {
 
@@ -133,8 +142,34 @@ contract.only('DSFProtocol', accounts => {
                 })
             })
 
-            it.only('call starts at price ~ Infinity', () => {
-                let usdWas, ethWas, tx, paid
+            it('call starts at price ~ Infinity', () => {
+                return bid(call.address, 1, false, chris)
+                .then(effects => {
+                    const ONE_WEI = web3.utils.fromWei('1')
+                    // auction bids on 1 wei worth of ETH
+                    expectEthEq(effects.ethChange, ONE_WEI)
+
+                    // auction receives ETH at expected price
+                    const expectedUSDChange = '-0.00000000000432'
+                    expectEthEq(effects.usdChange, expectedUSDChange)
+                })
+            })
+
+            it('discounts DSF token holder start price', () => {
+                return bid(call.address, 1, false, brian)
+                .then(effects => {
+                    const ONE_WEI = web3.utils.fromWei('1')
+                    // auction bids on 1 wei worth of ETH
+                    expectEthEq(effects.ethChange, ONE_WEI)
+
+                    // auction receives ETH at expected price
+                    const expectedUSDChange = '-0.000000000004106521'
+                    expectEthEq(effects.usdChange, expectedUSDChange)
+                })
+            })
+
+            it('call starts at price ~ Infinity', () => {
+                let usdWas, ethWas, paid
                 return _balances(brian)
                 .then(balances => {
                     [ethWas, usdWas] = balances
@@ -149,9 +184,8 @@ contract.only('DSFProtocol', accounts => {
                     return utils.getBlock()
                     .then(block => {
                         const { timestamp } = block
-                        const auctionDuration = 12 * 3600
                         const elapsed = timestamp - call.expiration
-                        const expectedPrice = MAX_DISCOUNT * auctionDuration * web3.utils.fromWei(call.strike) / elapsed
+                        const expectedPrice = MAX_DISCOUNT * AUCTION_DURATION * web3.utils.fromWei(call.strike) / elapsed
                         let actualPrice = usdWas.sub(usdIs) - 0
                         expect(actualPrice).to.closeTo(expectedPrice - 0, 10)
                         paid = usdWas.sub(usdIs) - 0
@@ -167,45 +201,51 @@ contract.only('DSFProtocol', accounts => {
                 })
             })
 
+            /**
+             * Tests that when the auction initially begins
+             * the bid for the protocol to buy ETH (Put option)
+             * is effectively zero
+             */
             it('put starts at price = Infinity', () => {
-                let ethWas, usdWas, tx, proceeds
+                let ethWas, usdWas, proceeds
                 return _balances(brian)
                 .then(balances => {
                     [ethWas, usdWas] = balances
-                    return protocol.bid(put.address, web3.utils.toWei('1'), { from: brian, value: web3.utils.toWei('1'), gas: 500000 })
+                    return protocol.bid(
+                        put.address,
+                        web3.utils.toWei('1'), {
+                            from: brian,
+                            value: web3.utils.toWei('1'),
+                            ...txOpts
+                        }
+                    )
                 })
-                .receipt(_tx => {
-                    tx = _tx
-
-                    return protocol._timePreference(brian)
-                })
-                .then(value => {
-                    debugger
+                .then(() => {
                     return _balances(brian)
                 })
                 .then(balances => {
+                    console.debug(balances)
+                    let [ethIs, usdIs] = balances
+
                     return utils.getBlock()
                     .then(block => {
-                        let [ethIs, usdIs] = balances
-                        let elapsed = block.timestamp + TIME_PREF - (put.expiration - 43200)
-                        let expectedProceeds = 1 / (86400 / (elapsed * 200));
-
-                        expect(ethWas.sub(ethIs).sub(tx.gasUsed).toPrecision()).to.eql(web3.utils.toWei('1'))
-                        proceeds = usdIs.sub(usdWas)
-                        expect(proceeds / 1e18).to.be.closeTo(expectedProceeds, 0.00231)
+                        let elapsed = block.timestamp - put.expiration
+                        // calculate the bid price USD ~$0.00
+                        const bidPriceUSD = elapsed * TEST_STRIKE_PRICE / AUCTION_DURATION
+                        const bidPriceWithDiscount = bidPriceUSD / MAX_DISCOUNT
+                        expect(ethWas.sub(ethIs) - 0).to.eq(web3.utils.toWei('1') - 0)
+                        proceeds = web3.utils.fromWei(usdIs.sub(usdWas))
+                        expect(proceeds - 0).to.be.closeTo(bidPriceWithDiscount, 0.00231)
+                        return protocol.holdersSettlement(put.address)
                     })
                 })
-                .then(() => {
-                    return protocol.holdersSettlement(put.address)
-                    .then(value => {
-                        expect(value.toPrecision()).to.eq(web3.utils.toWei(web3.utils.toBN('200')).sub(proceeds).toPrecision())
-                    })
-                })
-                .then(() => {
+                .then(value => {
+                    const expectedSettlement = TEST_STRIKE_PRICE - proceeds
+                    expect(web3.utils.fromWei(value) - 0).to.be.closeTo(expectedSettlement, 0.001)
                     return protocol.openInterest(put.address)
                 })
                 .then(interest => {
-                    expect(interest.toPrecision()).to.eq(web3.utils.toWei('1'))
+                    expect(interest.toString()).to.eq(web3.utils.toWei('1'))
                 })
             })
         })
@@ -356,6 +396,58 @@ contract.only('DSFProtocol', accounts => {
         })
     })
 })
+
+function expectEthEq(a, b) {
+    expect(asFixed(a)).to.eq(asFixed(b))
+}
+
+function calculateExpectedPrice(strike, expiration, timestamp, isPut) {
+    const elapsed = timestamp - expiration
+    if (isPut) {
+        return duration * elapsed / strike
+    } else {
+        return strike * AUCTION_DURATION / elapsed
+    }
+}
+
+function bid(token, amount, isPut, fromAccount) {
+    let block, ethWas, usdWas, ethIs, usdIs,
+        usdChange, ethChange,
+        holdersSettlement
+
+    return _balances(fromAccount)
+    .then(balances => {
+        [ethWas, usdWas] = balances
+
+        return protocol.bid(token, amount, {
+            from: fromAccount,
+            value: isPut ? amount : 0,
+            ...txOpts
+        })
+    })
+    .then(result => {
+        return utils.getBlock(result.receipt.blockNumber)
+    })
+    .then(b => {
+        block = b
+        return _balances(fromAccount)
+    })
+    .then(balances => {
+        [ethIs, usdIs] = balances
+        usdChange = usdIs.sub(usdWas)
+        ethChange = ethIs.sub(ethWas)
+        return protocol.holdersSettlement(token)
+    })
+    .then(settlement => {
+        holdersSettlement = web3.utils.fromWei(settlement)
+        return {
+            block,
+            usdChange,
+            ethChange,
+            holdersSettlement
+        }
+    })
+}
 
 function _balances(address) {
     return Promise.all([

@@ -82,10 +82,10 @@ module.exports.revert = function(id) {
     })
 }
 
-module.exports.getBlock = function() {
+module.exports.getBlock = function(blockNum) {
     return new Promise((resolve, reject) => {
         web3.eth.getBlockNumber((err, data) => {
-            web3.eth.getBlock(data, (err, data) => {
+            web3.eth.getBlock(blockNum || data, (err, data) => {
                 resolve(data)
             })
         })
@@ -98,4 +98,10 @@ module.exports.getBalance = function(address) {
             resolve(web3.utils.toBN(data))
         })
     })
+}
+
+module.exports.asFixed = function(value) {
+    if (typeof value === 'string')
+        return value
+    return web3.utils.fromWei(value.toString()).toString()
 }

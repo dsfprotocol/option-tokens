@@ -50,6 +50,11 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/ef4d9b9eb0c14c0c939f01ff294bdb22"),
       network_id: 3 // official id of the ropsten network
+    },
+    kovan: {
+      provider: () =>
+        new HDWalletProvider(mnemonic, "https://kovan.infura.io/v3/ef4d9b9eb0c14c0c939f01ff294bdb22"),
+      network_id: 42 // official id of the ropsten network
     }
     // Useful for private networks
     // private: {

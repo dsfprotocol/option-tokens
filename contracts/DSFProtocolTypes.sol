@@ -7,4 +7,10 @@ contract DSFProtocolTypes {
         Call,
         Put
     }
+
+    struct OptionSeries {
+        uint expiration;
+        Flavor flavor;
+        uint strike;
+    }
 }

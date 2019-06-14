@@ -14,12 +14,6 @@ contract DSFProtocol is DSFProtocolTypes {
     ERC20 public usdERC20;
     ERC20 public protocolToken;
 
-    struct OptionSeries {
-        uint expiration;
-        Flavor flavor;
-        uint strike;
-    }
-
     uint public constant DURATION = 12 hours;
     uint public constant HALF_DURATION = DURATION / 2;
 

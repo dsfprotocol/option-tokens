@@ -209,37 +209,38 @@ contract DSFProtocol is DSFProtocolTypes {
 
         require(now > series.expiration + DURATION);
 
-        uint unsettledPercent = openInterest[_series] * 1 ether / totalInterest[_series];
-        uint exercisedPercent = (totalInterest[_series] - openInterest[_series]) * 1 ether / totalInterest[_series];
-        uint owed;
+        (eth, usd) = calculateWriterSettlement(writers[_series][msg.sender], _series);
 
-        if (series.flavor == Flavor.Call) {
-            eth = writers[_series][msg.sender] * unsettledPercent / 1 ether;
-
-            if (eth > 0) {
-                msg.sender.transfer(owed);
-            }
-
-            usd = writers[_series][msg.sender] * exercisedPercent / 1 ether;
-            usd = usd * series.strike / 1 ether;
-            if (usd > 0) {
-                usdERC20.transfer(msg.sender, owed);
-            }
-        } else {
-            usd = writers[_series][msg.sender] * unsettledPercent / 1 ether;
-            usd = usd * series.strike / 1 ether;
-            if (usd > 0) {
-                usdERC20.transfer(msg.sender, usd);
-            }
-
-            eth = writers[_series][msg.sender] * exercisedPercent / 1 ether;
-            if (eth > 0) {
-                msg.sender.transfer(eth);
-            }
+        if (eth > 0) {
+            msg.sender.transfer(eth);
         }
 
-        writers[_series][msg.sender] = 0;
+        if (usd > 0) {
+            usdERC20.transfer(msg.sender, usd);
+        }
+
         return (eth, usd);
+    }
+
+    function calculateWriterSettlement(
+        uint written,
+        address _series
+    ) public view returns (uint eth, uint usd) {
+        OptionSeries memory series = seriesInfo[_series];
+        uint unsettledPercent = openInterest[_series] * 1 ether / totalInterest[_series];
+        uint exercisedPercent = (totalInterest[_series] - openInterest[_series]) * 1 ether / totalInterest[_series];
+
+        if (series.flavor == Flavor.Call) {
+            eth = written * unsettledPercent / 1 ether;
+            usd = written * exercisedPercent / 1 ether;
+            usd = usd * series.strike / 1 ether;
+            return (eth, usd);
+        } else {
+            usd = written * unsettledPercent / 1 ether;
+            usd = usd * series.strike / 1 ether;
+            eth = written * exercisedPercent / 1 ether;
+            return (eth, usd);
+        }
     }
 
     function settle(address _series) public returns (uint usd) {
@@ -254,7 +255,7 @@ contract DSFProtocol is DSFProtocolTypes {
         usdERC20.transfer(msg.sender, usd);
         return usd;
     }
-    
+
     // map preference to a discount factor between 0.95 and 1
     function discount(address from) public view returns (uint) {
         return (100 ether - _unsLn(preference(from) * 139 + 1 ether)) / 100;

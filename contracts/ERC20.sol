@@ -1,8 +1,28 @@
 pragma solidity ^0.5;
 
-import "./ERC20Variables.sol";
 
-contract ERC20 is ERC20Variables {
+contract ERC20 {
+    uint256 constant public MAX_UINT256 = 2**256 - 1;
+    mapping(address => uint) public balances;
+    mapping(address => mapping(address => uint)) public allowed;
+
+    uint8 public constant decimals = 18;
+    string public name;
+    string public symbol;
+    uint public totalSupply;
+
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+
+    event Created(address creator, uint supply);
+
+    function balanceOf(address _owner) public view returns (uint256 balance) {
+        return balances[_owner];
+    }
+
+    function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
+        return allowed[_owner][_spender];
+    }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
         _transferBalance(msg.sender, _to, _value);
@@ -11,10 +31,10 @@ contract ERC20 is ERC20Variables {
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        uint256 allowance = allowed[_from][msg.sender];
-        require(allowance >= _value);
+        uint256 allow = allowed[_from][msg.sender];
+        require(allow >= _value);
         _transferBalance(_from, _to, _value);
-        if (allowance < MAX_UINT256) {
+        if (allow < MAX_UINT256) {
             allowed[_from][msg.sender] -= _value;
         }
         emit Transfer(_from, _to, _value);

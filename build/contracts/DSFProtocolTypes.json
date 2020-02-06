@@ -1,32 +1,32 @@
 {
   "contractName": "DSFProtocolTypes",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/DSFProtocolTypes.sol\":\"DSFProtocolTypes\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/DSFProtocolTypes.sol\":{\"keccak256\":\"0xdc9cd07376fb82adb3403a5047466bbfd644f7c59a466489a7b620dcd4fc755e\",\"urls\":[\"bzzr://7329c16e398a16570a17d6c31e0d696f2e90c7d21734b41238e248bd3310df5d\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820dde71108462719400e14ddca3e9566b0d16f40e6716f267c001b44f3d140e67d0029",
-  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820dde71108462719400e14ddca3e9566b0d16f40e6716f267c001b44f3d140e67d0029",
-  "sourceMap": "24:266:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:266:2;;;;;;;",
-  "deployedSourceMap": "24:266:2:-;;;;;",
-  "source": "pragma solidity ^0.5;\n\n\ncontract DSFProtocolTypes {\n    // We use \"flavor\" because type is a reserved word in many programming languages\n    enum Flavor {\n        Call,\n        Put\n    }\n\n    struct OptionSeries {\n        uint expiration;\n        Flavor flavor;\n        uint strike;\n    }\n}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/DSFProtocolTypes.sol\":\"DSFProtocolTypes\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/DSFProtocolTypes.sol\":{\"keccak256\":\"0x8a364fe0b6c304d1030db200ba3f564c93f4e87798c8824102f808b2284433fd\",\"urls\":[\"bzz-raw://ffd0d5658a76561f1ff97f32cc28ec2779a4f91ac669ec174c670f424b800ed7\",\"dweb:/ipfs/QmUScBiySz2E7ikaFnpijvdgLuactjZtqPU7f3qBdL3Kpf\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820555f0a8d2f85c926b2e8a27fdbe81ac824658496cd201ddda0897c8d82eb0b0864736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820555f0a8d2f85c926b2e8a27fdbe81ac824658496cd201ddda0897c8d82eb0b0864736f6c63430005100032",
+  "sourceMap": "24:296:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:296:1;;;;;;;",
+  "deployedSourceMap": "24:296:1:-;;;;;",
+  "source": "pragma solidity ^0.5;\n\n\ncontract DSFProtocolTypes {\n    // // We use \"flavor\" because type is a reserved word in many programming languages\n    // enum Flavor {\n    //     Call,\n    //     Put\n    // }\n\n    // struct OptionSeries {\n    //     uint expiration;\n    //     Flavor flavor;\n    //     uint strike;\n    // }\n}",
   "sourcePath": "/Users/brianwheeler/optimum/protocol/contracts/DSFProtocolTypes.sol",
   "ast": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/DSFProtocolTypes.sol",
     "exportedSymbols": {
       "DSFProtocolTypes": [
-        1342
+        8
       ]
     },
-    "id": 1343,
+    "id": 9,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1331,
+        "id": 7,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:2"
+        "src": "0:21:1"
       },
       {
         "baseContracts": [],
@@ -34,151 +34,38 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1342,
+        "id": 8,
         "linearizedBaseContracts": [
-          1342
+          8
         ],
         "name": "DSFProtocolTypes",
         "nodeType": "ContractDefinition",
-        "nodes": [
-          {
-            "canonicalName": "DSFProtocolTypes.Flavor",
-            "id": 1334,
-            "members": [
-              {
-                "id": 1332,
-                "name": "Call",
-                "nodeType": "EnumValue",
-                "src": "163:4:2"
-              },
-              {
-                "id": 1333,
-                "name": "Put",
-                "nodeType": "EnumValue",
-                "src": "177:3:2"
-              }
-            ],
-            "name": "Flavor",
-            "nodeType": "EnumDefinition",
-            "src": "141:45:2"
-          },
-          {
-            "canonicalName": "DSFProtocolTypes.OptionSeries",
-            "id": 1341,
-            "members": [
-              {
-                "constant": false,
-                "id": 1336,
-                "name": "expiration",
-                "nodeType": "VariableDeclaration",
-                "scope": 1341,
-                "src": "222:15:2",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
-                },
-                "typeName": {
-                  "id": 1335,
-                  "name": "uint",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "222:4:2",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1338,
-                "name": "flavor",
-                "nodeType": "VariableDeclaration",
-                "scope": 1341,
-                "src": "247:13:2",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_Flavor_$1334",
-                  "typeString": "enum DSFProtocolTypes.Flavor"
-                },
-                "typeName": {
-                  "contractScope": null,
-                  "id": 1337,
-                  "name": "Flavor",
-                  "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 1334,
-                  "src": "247:6:2",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Flavor_$1334",
-                    "typeString": "enum DSFProtocolTypes.Flavor"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1340,
-                "name": "strike",
-                "nodeType": "VariableDeclaration",
-                "scope": 1341,
-                "src": "270:11:2",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
-                },
-                "typeName": {
-                  "id": 1339,
-                  "name": "uint",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "270:4:2",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              }
-            ],
-            "name": "OptionSeries",
-            "nodeType": "StructDefinition",
-            "scope": 1342,
-            "src": "192:96:2",
-            "visibility": "public"
-          }
-        ],
-        "scope": 1343,
-        "src": "24:266:2"
+        "nodes": [],
+        "scope": 9,
+        "src": "24:296:1"
       }
     ],
-    "src": "0:290:2"
+    "src": "0:320:1"
   },
   "legacyAST": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/DSFProtocolTypes.sol",
     "exportedSymbols": {
       "DSFProtocolTypes": [
-        1342
+        8
       ]
     },
-    "id": 1343,
+    "id": 9,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1331,
+        "id": 7,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:2"
+        "src": "0:21:1"
       },
       {
         "baseContracts": [],
@@ -186,139 +73,26 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1342,
+        "id": 8,
         "linearizedBaseContracts": [
-          1342
+          8
         ],
         "name": "DSFProtocolTypes",
         "nodeType": "ContractDefinition",
-        "nodes": [
-          {
-            "canonicalName": "DSFProtocolTypes.Flavor",
-            "id": 1334,
-            "members": [
-              {
-                "id": 1332,
-                "name": "Call",
-                "nodeType": "EnumValue",
-                "src": "163:4:2"
-              },
-              {
-                "id": 1333,
-                "name": "Put",
-                "nodeType": "EnumValue",
-                "src": "177:3:2"
-              }
-            ],
-            "name": "Flavor",
-            "nodeType": "EnumDefinition",
-            "src": "141:45:2"
-          },
-          {
-            "canonicalName": "DSFProtocolTypes.OptionSeries",
-            "id": 1341,
-            "members": [
-              {
-                "constant": false,
-                "id": 1336,
-                "name": "expiration",
-                "nodeType": "VariableDeclaration",
-                "scope": 1341,
-                "src": "222:15:2",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
-                },
-                "typeName": {
-                  "id": 1335,
-                  "name": "uint",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "222:4:2",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1338,
-                "name": "flavor",
-                "nodeType": "VariableDeclaration",
-                "scope": 1341,
-                "src": "247:13:2",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_Flavor_$1334",
-                  "typeString": "enum DSFProtocolTypes.Flavor"
-                },
-                "typeName": {
-                  "contractScope": null,
-                  "id": 1337,
-                  "name": "Flavor",
-                  "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 1334,
-                  "src": "247:6:2",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_Flavor_$1334",
-                    "typeString": "enum DSFProtocolTypes.Flavor"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 1340,
-                "name": "strike",
-                "nodeType": "VariableDeclaration",
-                "scope": 1341,
-                "src": "270:11:2",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint256",
-                  "typeString": "uint256"
-                },
-                "typeName": {
-                  "id": 1339,
-                  "name": "uint",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "270:4:2",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  }
-                },
-                "value": null,
-                "visibility": "internal"
-              }
-            ],
-            "name": "OptionSeries",
-            "nodeType": "StructDefinition",
-            "scope": 1342,
-            "src": "192:96:2",
-            "visibility": "public"
-          }
-        ],
-        "scope": 1343,
-        "src": "24:266:2"
+        "nodes": [],
+        "scope": 9,
+        "src": "24:296:1"
       }
     ],
-    "src": "0:290:2"
+    "src": "0:320:1"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.8+commit.23d335f2.Emscripten.clang"
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.10",
-  "updatedAt": "2019-06-14T16:48:13.029Z",
+  "schemaVersion": "3.0.21",
+  "updatedAt": "2020-02-06T15:33:53.081Z",
   "devdoc": {
     "methods": {}
   },

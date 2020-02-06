@@ -1,0 +1,310 @@
+{
+  "contractName": "CallOptionTokenFactory",
+  "abi": [
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "createToken",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":false,\"inputs\":[],\"name\":\"createToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/OptionTokenFactory.sol\":\"CallOptionTokenFactory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/OptionTokenFactory.sol\":{\"keccak256\":\"0xcd0160bf1952be5ad1088f21af3469c7d369fa9c00a3722450ec727f6a33e7fe\",\"urls\":[\"bzz-raw://365164bbcc183423530e9ff1f29a3954483d8e69bd2e1f811eeb61345e8e1ba4\",\"dweb:/ipfs/QmduNXnDio9z3SXyWV4wkyxN4Y1kGrFwbvPneZvQkBoWi1\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060af8061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c80639cbf9e3614602d575b600080fd5b60336075565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60009056fea265627a7a72315820b9e66d855af526b52a043a93239815a8a454c30b61781261dbd2b8eca03a6a5d64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060285760003560e01c80639cbf9e3614602d575b600080fd5b60336075565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60009056fea265627a7a72315820b9e66d855af526b52a043a93239815a8a454c30b61781261dbd2b8eca03a6a5d64736f6c63430005100032",
+  "sourceMap": "24:174:7:-;;;62:72;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:72:7;24:174;;;;;;",
+  "deployedSourceMap": "24:174:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:174:7;;;;;;;;;;;;;;;;;;;140:56;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;179:7;140:56;:::o",
+  "source": "pragma solidity ^0.5;\n\n\ncontract CallOptionTokenFactory {\n    constructor() public {\n        // setup the option token templates\n    }\n\n    function createToken() public returns (address) {\n\n    }\n}",
+  "sourcePath": "/Users/brianwheeler/optimum/protocol/contracts/OptionTokenFactory.sol",
+  "ast": {
+    "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/OptionTokenFactory.sol",
+    "exportedSymbols": {
+      "CallOptionTokenFactory": [
+        972
+      ]
+    },
+    "id": 973,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 961,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:21:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 972,
+        "linearizedBaseContracts": [
+          972
+        ],
+        "name": "CallOptionTokenFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 964,
+              "nodeType": "Block",
+              "src": "83:51:7",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 965,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 962,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "73:2:7"
+            },
+            "returnParameters": {
+              "id": 963,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "83:0:7"
+            },
+            "scope": 972,
+            "src": "62:72:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 970,
+              "nodeType": "Block",
+              "src": "188:8:7",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 971,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 966,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "160:2:7"
+            },
+            "returnParameters": {
+              "id": 969,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 968,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 971,
+                  "src": "179:7:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 967,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "179:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "178:9:7"
+            },
+            "scope": 972,
+            "src": "140:56:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 973,
+        "src": "24:174:7"
+      }
+    ],
+    "src": "0:198:7"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/OptionTokenFactory.sol",
+    "exportedSymbols": {
+      "CallOptionTokenFactory": [
+        972
+      ]
+    },
+    "id": 973,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 961,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:21:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 972,
+        "linearizedBaseContracts": [
+          972
+        ],
+        "name": "CallOptionTokenFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 964,
+              "nodeType": "Block",
+              "src": "83:51:7",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 965,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 962,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "73:2:7"
+            },
+            "returnParameters": {
+              "id": 963,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "83:0:7"
+            },
+            "scope": 972,
+            "src": "62:72:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 970,
+              "nodeType": "Block",
+              "src": "188:8:7",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 971,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createToken",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 966,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "160:2:7"
+            },
+            "returnParameters": {
+              "id": 969,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 968,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 971,
+                  "src": "179:7:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 967,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "179:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "178:9:7"
+            },
+            "scope": 972,
+            "src": "140:56:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 973,
+        "src": "24:174:7"
+      }
+    ],
+    "src": "0:198:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.21",
+  "updatedAt": "2020-02-06T15:33:53.098Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

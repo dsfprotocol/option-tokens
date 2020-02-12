@@ -3,7 +3,10 @@
     "chai": "^4.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
-    "truffle-core": "^5.0.21",
+    "truffle-core": "^5.0.34",
     "truffle-hdwallet-provider": "^1.0.10"
+  },
+  "devDependencies": {
+    "truffle": "^5.1.11"
   }
 }

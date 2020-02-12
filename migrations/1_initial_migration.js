@@ -1,13 +1,11 @@
 const Migrations = artifacts.require("Migrations");
-const DSFProtocol = artifacts.require('DSFProtocol')
-const USDMock = artifacts.require('USDMock')
-const DSFTokenMock = artifacts.require('DSFTokenMock')
+const DefaultBalanceToken = artifacts.require('default-balance-token/DefaultBalanceToken')
+const DSFToken = artifacts.require('dsf-token/DecentralizedSettlementFacilityToken')
+const OptionTokenFactory = artifacts.require('OptionTokenFactory')
 
-module.exports = function(deployer) {
-  deployer.deploy(Migrations);
-  return deployer.deploy(DSFTokenMock).then(token => {
-    return deployer.deploy(USDMock).then(usd => {
-      return deployer.deploy(DSFProtocol, token.address, usd.address);
-    })
-  })
+module.exports = async function(deployer) {
+  await deployer.deploy(Migrations)
+  await deployer.deploy(DefaultBalanceToken)
+  await deployer.deploy(DSFToken)
+  await deployer.deploy(OptionTokenFactory)
 };

@@ -1,0 +1,20 @@
+{
+  "authors": [
+    "Brian Wheeler <brian@dsfprotocol.com>"
+  ],
+  "license": "MIT",
+  "description": "Decentralized Settlement Facility Token",
+  "keywords": [
+    "ethereum",
+    "options"
+  ],
+  "links": {},
+  "sources": [
+    "./contracts/DecentralizedSettlementFacilityToken.sol",
+    "./contracts/Migrations.sol"
+  ],
+  "dependencies": {},
+  "manifest_version": 1,
+  "package_name": "dsf-token",
+  "version": "1.0.0"
+}

@@ -11,6 +11,8 @@
       "options"
     ],
     "dependencies": {
+      "default-balance-token": "1.0.0",
+      "dsf-token": "1.0.0"
     },
     "license": "MIT"
 }

@@ -1,0 +1,20 @@
+{
+  "authors": [
+    "Brian Wheeler <brian@dsfprotocol.com>"
+  ],
+  "license": "MIT",
+  "description": "A mostly ERC20-compliant token with a default balance for everyone.",
+  "keywords": [
+    "ethereum",
+    "ERC20"
+  ],
+  "links": {},
+  "sources": [
+    "./contracts/DefaultBalanceToken.sol",
+    "./contracts/Migrations.sol"
+  ],
+  "dependencies": {},
+  "manifest_version": 1,
+  "package_name": "default-balance-token",
+  "version": "1.0.0"
+}

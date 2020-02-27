@@ -4,6 +4,13 @@ import "./OptionToken.sol";
 
 
 contract ETHCallOptionToken is OptionToken {
+    function approveAndCall(address spender, uint256 quantity, bytes memory data) public returns (bool) {
+        allowed[msg.sender][spender] = quantity;
+        (bool result,) = spender.call(data);
+        require(result);
+        return true;
+    }
+
     function write() public payable returns (bool) {
         totalSupply += msg.value;
         balances[msg.sender] += msg.value;
@@ -12,15 +19,33 @@ contract ETHCallOptionToken is OptionToken {
         return true;
     }
 
-    function writeApproveAndCall(address writer, address to, bytes memory data) public payable returns (bool) {
-        totalSupply += msg.value;
-        writers[writer] += msg.value;
-        written += msg.value;
-        uint256 allowanceWas = allowed[writer][to];
-        allowed[writer][to] += msg.value;
+    function writeAndApprove(address spender) public payable returns (bool) {
+        write();
+        allowed[msg.sender][spender] += msg.value;
+    }
+
+    function writeApproveAndCall(address to, bytes memory data) public payable returns (bool) {
+        writeAndApprove(to);
         (bool result,) = to.call(data);
-        require(result && allowed[writer][to] == allowanceWas);
+        require(result);
         return true;
+    }
+
+    function writeAsOrigin() public payable returns (bool) {
+        totalSupply += msg.value;
+        writers[tx.origin] += msg.value;
+        written += msg.value;
+    }
+
+    function writeAndApproveAsOrigin(address to) public payable returns (bool) {
+        writeAsOrigin();
+        allowed[tx.origin][to] = msg.value;
+    }
+
+    function writeApproveAndCallAsOrigin(address to, bytes memory data) public payable returns (bool) {
+        writeAndApproveAsOrigin(to);
+        (bool result,) = to.call(data);
+        require(result);
     }
 
     function close(uint256 amount) public returns (bool) {
@@ -80,5 +105,13 @@ contract ETHCallOptionToken is OptionToken {
         msg.sender.transfer(redeemETH);
         usd.transfer(msg.sender, redeemUSD);
         return true;
+    }
+
+    function name() public returns (string memory) {
+        return Factory(address(FactoryAddress)).getTokenName(true, expiration, strike);
+    }
+
+    function symbol() public returns (string memory) {
+        return Factory(address(FactoryAddress)).getTokenSymbol(true, expiration, strike);
     }
 }

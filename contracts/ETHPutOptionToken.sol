@@ -13,12 +13,33 @@ contract ETHPutOptionToken is OptionToken {
         return true;
     }
 
-    function writeApproveAndCall(address to, uint256 amount, bytes memory data) public returns (bool) {
+    function writeAndApprove(uint256 amount, address spender) public payable returns (bool) {
+        write(amount);
+        allowed[msg.sender][spender] = msg.value;
+    }
+
+    function writeApproveAndCall(uint256 amount, address to, bytes memory data) public returns (bool) {
+        writeAndApprove(amount, to);
+        (bool result,) = to.call(data);
+        require(result);
+        return true;
+    }
+
+    function writeAsOrigin(uint256 amount) public returns (bool) {
         usd.transferFrom(msg.sender, address(this), amount * strike / 1 ether);
         totalSupply += amount;
-        balances[msg.sender] += amount;
-        writers[msg.sender] += amount;
+        balances[tx.origin] += amount;
+        writers[tx.origin] += amount;
         written += amount;
+    }
+
+    function writeAndApproveAsOrigin(uint256 amount, address to) public returns (bool) {
+        writeAsOrigin(amount);
+        allowed[tx.origin][to] = amount;
+    }
+
+    function writeApproveAndCallAsOrigin(uint256 amount, address to, bytes memory data) public returns (bool) {
+        writeAndApproveAsOrigin(amount, to);
         (bool result,) = to.call(data);
         require(result);
         return true;
@@ -84,5 +105,13 @@ contract ETHPutOptionToken is OptionToken {
         msg.sender.transfer(redeemETH);
         usd.transfer(msg.sender, redeemUSD);
         return true;
+    }
+
+    function name() public returns (string memory) {
+        return Factory(address(FactoryAddress)).getTokenName(false, expiration, strike);
+    }
+
+    function symbol() public returns (string memory) {
+        return Factory(address(FactoryAddress)).getTokenSymbol(false, expiration, strike);
     }
 }

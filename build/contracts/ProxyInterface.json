@@ -34,21 +34,21 @@
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/ProxyInterface.sol",
     "exportedSymbols": {
       "ProxyInterface": [
-        1070
+        2045
       ]
     },
-    "id": 1071,
+    "id": 2046,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1062,
+        "id": 2037,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:9"
+        "src": "0:21:12"
       },
       {
         "baseContracts": [],
@@ -56,9 +56,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1070,
+        "id": 2045,
         "linearizedBaseContracts": [
-          1070
+          2045
         ],
         "name": "ProxyInterface",
         "nodeType": "ContractDefinition",
@@ -66,23 +66,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 1069,
+            "id": 2044,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "optionTokenWasCloned",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1065,
+              "id": 2040,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1064,
+                  "id": 2039,
                   "name": "token",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1069,
-                  "src": "84:13:9",
+                  "scope": 2044,
+                  "src": "84:13:12",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -90,10 +90,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1063,
+                    "id": 2038,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "84:7:9",
+                    "src": "84:7:12",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -104,19 +104,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "83:15:9"
+              "src": "83:15:12"
             },
             "returnParameters": {
-              "id": 1068,
+              "id": 2043,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1067,
+                  "id": 2042,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1069,
-                  "src": "115:4:9",
+                  "scope": 2044,
+                  "src": "115:4:12",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -124,10 +124,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1066,
+                    "id": 2041,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "115:4:9",
+                    "src": "115:4:12",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -137,40 +137,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "114:6:9"
+              "src": "114:6:12"
             },
-            "scope": 1070,
-            "src": "54:67:9",
+            "scope": 2045,
+            "src": "54:67:12",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1071,
-        "src": "24:99:9"
+        "scope": 2046,
+        "src": "24:99:12"
       }
     ],
-    "src": "0:123:9"
+    "src": "0:123:12"
   },
   "legacyAST": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/ProxyInterface.sol",
     "exportedSymbols": {
       "ProxyInterface": [
-        1070
+        2045
       ]
     },
-    "id": 1071,
+    "id": 2046,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1062,
+        "id": 2037,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:9"
+        "src": "0:21:12"
       },
       {
         "baseContracts": [],
@@ -178,9 +178,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1070,
+        "id": 2045,
         "linearizedBaseContracts": [
-          1070
+          2045
         ],
         "name": "ProxyInterface",
         "nodeType": "ContractDefinition",
@@ -188,23 +188,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 1069,
+            "id": 2044,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "optionTokenWasCloned",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1065,
+              "id": 2040,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1064,
+                  "id": 2039,
                   "name": "token",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1069,
-                  "src": "84:13:9",
+                  "scope": 2044,
+                  "src": "84:13:12",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -212,10 +212,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1063,
+                    "id": 2038,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "84:7:9",
+                    "src": "84:7:12",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -226,19 +226,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "83:15:9"
+              "src": "83:15:12"
             },
             "returnParameters": {
-              "id": 1068,
+              "id": 2043,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1067,
+                  "id": 2042,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1069,
-                  "src": "115:4:9",
+                  "scope": 2044,
+                  "src": "115:4:12",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -246,10 +246,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1066,
+                    "id": 2041,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "115:4:9",
+                    "src": "115:4:12",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -259,28 +259,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "114:6:9"
+              "src": "114:6:12"
             },
-            "scope": 1070,
-            "src": "54:67:9",
+            "scope": 2045,
+            "src": "54:67:12",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 1071,
-        "src": "24:99:9"
+        "scope": 2046,
+        "src": "24:99:12"
       }
     ],
-    "src": "0:123:9"
+    "src": "0:123:12"
   },
   "compiler": {
     "name": "solc",
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.21",
-  "updatedAt": "2020-02-06T16:16:38.833Z",
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-02-15T15:25:16.678Z",
   "devdoc": {
     "methods": {}
   },

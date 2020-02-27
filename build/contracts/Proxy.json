@@ -1,0 +1,102 @@
+{
+  "contractName": "Proxy",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/test_helpers/Proxy.sol\":\"Proxy\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/test_helpers/Proxy.sol\":{\"keccak256\":\"0xf99a50b76afe9ed94f99cdb146884042fa4609261cb2fcb8b32e5cc88e619dd2\",\"urls\":[\"bzz-raw://49927f6d0ca6ab7243f4fc0117de5db4afc64b1d3be41f67f55f3462c9e9f496\",\"dweb:/ipfs/QmavekAEQZkTqwqtcGrnid2v5DSkuL9MvCR6rm4rD8FLmF\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820a95193be4b10b9994aee520ba24ffa32fcc540791d459eb1340b55a46de363dc64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820a95193be4b10b9994aee520ba24ffa32fcc540791d459eb1340b55a46de363dc64736f6c63430005100032",
+  "sourceMap": "103:175:13:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;103:175:13;;;;;;;",
+  "deployedSourceMap": "103:175:13:-;;;;;",
+  "source": "pragma solidity ^0.5;\n\n// import \"../OptionTokenFactory.sol\";\n// import \"../ETHCallOptionToken.sol\";\n\n\ncontract Proxy {\n    // constructor(address _factory) public {\n        // OptionTokenFactory f = OptionTokenFactory(_factory);\n\n        // f.createPutOptionToken();\n    // }\n}",
+  "sourcePath": "/Users/brianwheeler/optimum/protocol/contracts/test_helpers/Proxy.sol",
+  "ast": {
+    "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/test_helpers/Proxy.sol",
+    "exportedSymbols": {
+      "Proxy": [
+        2048
+      ]
+    },
+    "id": 2049,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2047,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:21:13"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2048,
+        "linearizedBaseContracts": [
+          2048
+        ],
+        "name": "Proxy",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 2049,
+        "src": "103:175:13"
+      }
+    ],
+    "src": "0:278:13"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/test_helpers/Proxy.sol",
+    "exportedSymbols": {
+      "Proxy": [
+        2048
+      ]
+    },
+    "id": 2049,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2047,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:21:13"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2048,
+        "linearizedBaseContracts": [
+          2048
+        ],
+        "name": "Proxy",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 2049,
+        "src": "103:175:13"
+      }
+    ],
+    "src": "0:278:13"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-02-15T15:25:16.679Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

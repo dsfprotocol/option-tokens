@@ -37,21 +37,21 @@
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/LiquidatorInterface.sol",
     "exportedSymbols": {
       "LiquidatorInterface": [
-        800
+        1682
       ]
     },
-    "id": 801,
+    "id": 1683,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 791,
+        "id": 1673,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:4"
+        "src": "0:21:7"
       },
       {
         "baseContracts": [],
@@ -59,9 +59,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 800,
+        "id": 1682,
         "linearizedBaseContracts": [
-          800
+          1682
         ],
         "name": "LiquidatorInterface",
         "nodeType": "ContractDefinition",
@@ -69,26 +69,26 @@
           {
             "body": null,
             "documentation": null,
-            "id": 794,
+            "id": 1676,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveETH",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 792,
+              "id": 1674,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "78:2:4"
+              "src": "78:2:7"
             },
             "returnParameters": {
-              "id": 793,
+              "id": 1675,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "95:0:4"
+              "src": "95:0:7"
             },
-            "scope": 800,
-            "src": "59:37:4",
+            "scope": 1682,
+            "src": "59:37:7",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "public"
@@ -96,23 +96,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 799,
+            "id": 1681,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveUSD",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 797,
+              "id": 1679,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 796,
+                  "id": 1678,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 799,
-                  "src": "121:14:4",
+                  "scope": 1681,
+                  "src": "121:14:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -120,10 +120,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 795,
+                    "id": 1677,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "121:7:4",
+                    "src": "121:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -133,46 +133,46 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "120:16:4"
+              "src": "120:16:7"
             },
             "returnParameters": {
-              "id": 798,
+              "id": 1680,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "143:0:4"
+              "src": "143:0:7"
             },
-            "scope": 800,
-            "src": "101:43:4",
+            "scope": 1682,
+            "src": "101:43:7",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 801,
-        "src": "24:122:4"
+        "scope": 1683,
+        "src": "24:122:7"
       }
     ],
-    "src": "0:146:4"
+    "src": "0:146:7"
   },
   "legacyAST": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/LiquidatorInterface.sol",
     "exportedSymbols": {
       "LiquidatorInterface": [
-        800
+        1682
       ]
     },
-    "id": 801,
+    "id": 1683,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 791,
+        "id": 1673,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:4"
+        "src": "0:21:7"
       },
       {
         "baseContracts": [],
@@ -180,9 +180,9 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 800,
+        "id": 1682,
         "linearizedBaseContracts": [
-          800
+          1682
         ],
         "name": "LiquidatorInterface",
         "nodeType": "ContractDefinition",
@@ -190,26 +190,26 @@
           {
             "body": null,
             "documentation": null,
-            "id": 794,
+            "id": 1676,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveETH",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 792,
+              "id": 1674,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "78:2:4"
+              "src": "78:2:7"
             },
             "returnParameters": {
-              "id": 793,
+              "id": 1675,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "95:0:4"
+              "src": "95:0:7"
             },
-            "scope": 800,
-            "src": "59:37:4",
+            "scope": 1682,
+            "src": "59:37:7",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "public"
@@ -217,23 +217,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 799,
+            "id": 1681,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveUSD",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 797,
+              "id": 1679,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 796,
+                  "id": 1678,
                   "name": "amount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 799,
-                  "src": "121:14:4",
+                  "scope": 1681,
+                  "src": "121:14:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -241,10 +241,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 795,
+                    "id": 1677,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "121:7:4",
+                    "src": "121:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -254,34 +254,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "120:16:4"
+              "src": "120:16:7"
             },
             "returnParameters": {
-              "id": 798,
+              "id": 1680,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "143:0:4"
+              "src": "143:0:7"
             },
-            "scope": 800,
-            "src": "101:43:4",
+            "scope": 1682,
+            "src": "101:43:7",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 801,
-        "src": "24:122:4"
+        "scope": 1683,
+        "src": "24:122:7"
       }
     ],
-    "src": "0:146:4"
+    "src": "0:146:7"
   },
   "compiler": {
     "name": "solc",
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.21",
-  "updatedAt": "2020-02-06T15:33:53.096Z",
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-02-15T15:25:16.666Z",
   "devdoc": {
     "methods": {}
   },

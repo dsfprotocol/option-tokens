@@ -1,0 +1,418 @@
+{
+  "contractName": "ETHCallOptionTokenAddress",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/ETHCallOptionTokenProxy.sol\":\"ETHCallOptionTokenAddress\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/ETHCallOptionTokenProxy.sol\":{\"keccak256\":\"0x70ff613dc888a3aabee201fb7604e841acb3b772580256f78c74541faf23a14b\",\"urls\":[\"bzz-raw://97fdb90882ca05c52678f1a8a5acfac65eb539d075a348c9a417e3643b1e1011\",\"dweb:/ipfs/Qmc2H9k8A7NTw3bkFCw2QBcyzAuPiwS14v7QwwhYVkFNcC\"]}},\"version\":1}",
+  "bytecode": "0x60556023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea265627a7a723158204cc4e9ccd6743a27ce17634802805ae1c79acd6b9a0dff71d53d93e74178abdb64736f6c63430005100032",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea265627a7a723158204cc4e9ccd6743a27ce17634802805ae1c79acd6b9a0dff71d53d93e74178abdb64736f6c63430005100032",
+  "sourceMap": "23:36:3:-;;132:2:-1;166:7;155:9;146:7;137:37;255:7;249:14;246:1;241:23;235:4;232:33;222:2;;269:9;222:2;293:9;290:1;283:20;323:4;314:7;306:22;347:7;338;331:24",
+  "deployedSourceMap": "23:36:3:-;;;;;;;;",
+  "source": "pragma solidity ^0.5;\n\nlibrary ETHCallOptionTokenAddress {}\n\n\ncontract ETHCallOptionTokenProxy {\n    function () external payable {\n        //solium-disable-next-line security/no-inline-assembly\n        address tokenLib = address(ETHCallOptionTokenAddress);\n        assembly {\n            let ptr := mload(0x40)\n            calldatacopy(ptr, 0, calldatasize)\n            let result := delegatecall(gas, tokenLib, ptr, calldatasize, 0, 0)\n            let size := returndatasize\n            returndatacopy(ptr, 0, size)\n\n            switch result\n            case 0 { revert(ptr, size) }\n            default { return(ptr, size) }\n        }\n    }\n}",
+  "sourcePath": "/Users/brianwheeler/optimum/protocol/contracts/ETHCallOptionTokenProxy.sol",
+  "ast": {
+    "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/ETHCallOptionTokenProxy.sol",
+    "exportedSymbols": {
+      "ETHCallOptionTokenAddress": [
+        840
+      ],
+      "ETHCallOptionTokenProxy": [
+        852
+      ]
+    },
+    "id": 853,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 839,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:21:3"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 840,
+        "linearizedBaseContracts": [
+          840
+        ],
+        "name": "ETHCallOptionTokenAddress",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 853,
+        "src": "23:36:3"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 852,
+        "linearizedBaseContracts": [
+          852
+        ],
+        "name": "ETHCallOptionTokenProxy",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 850,
+              "nodeType": "Block",
+              "src": "130:513:3",
+              "statements": [
+                {
+                  "assignments": [
+                    844
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 844,
+                      "name": "tokenLib",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 850,
+                      "src": "203:16:3",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 843,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "203:7:3",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 848,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 846,
+                        "name": "ETHCallOptionTokenAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 840,
+                        "src": "230:25:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ETHCallOptionTokenAddress_$840_$",
+                          "typeString": "type(library ETHCallOptionTokenAddress)"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_type$_t_contract$_ETHCallOptionTokenAddress_$840_$",
+                          "typeString": "type(library ETHCallOptionTokenAddress)"
+                        }
+                      ],
+                      "id": 845,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "222:7:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": "address"
+                    },
+                    "id": 847,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "222:34:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "203:53:3"
+                },
+                {
+                  "externalReferences": [
+                    {
+                      "tokenLib": {
+                        "declaration": 844,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "403:8:3",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 849,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    let ptr := mload(0x40)\n    calldatacopy(ptr, 0, calldatasize())\n    let result := delegatecall(gas(), tokenLib, ptr, calldatasize(), 0, 0)\n    let size := returndatasize()\n    returndatacopy(ptr, 0, size)\n    switch result\n    case 0 { revert(ptr, size) }\n    default { return(ptr, size) }\n}",
+                  "src": "266:371:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 851,
+            "implemented": true,
+            "kind": "fallback",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 841,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "110:2:3"
+            },
+            "returnParameters": {
+              "id": 842,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "130:0:3"
+            },
+            "scope": 852,
+            "src": "101:542:3",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 853,
+        "src": "62:583:3"
+      }
+    ],
+    "src": "0:645:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/ETHCallOptionTokenProxy.sol",
+    "exportedSymbols": {
+      "ETHCallOptionTokenAddress": [
+        840
+      ],
+      "ETHCallOptionTokenProxy": [
+        852
+      ]
+    },
+    "id": 853,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 839,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:21:3"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 840,
+        "linearizedBaseContracts": [
+          840
+        ],
+        "name": "ETHCallOptionTokenAddress",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 853,
+        "src": "23:36:3"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 852,
+        "linearizedBaseContracts": [
+          852
+        ],
+        "name": "ETHCallOptionTokenProxy",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 850,
+              "nodeType": "Block",
+              "src": "130:513:3",
+              "statements": [
+                {
+                  "assignments": [
+                    844
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 844,
+                      "name": "tokenLib",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 850,
+                      "src": "203:16:3",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 843,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "203:7:3",
+                        "stateMutability": "nonpayable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 848,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 846,
+                        "name": "ETHCallOptionTokenAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 840,
+                        "src": "230:25:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ETHCallOptionTokenAddress_$840_$",
+                          "typeString": "type(library ETHCallOptionTokenAddress)"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_type$_t_contract$_ETHCallOptionTokenAddress_$840_$",
+                          "typeString": "type(library ETHCallOptionTokenAddress)"
+                        }
+                      ],
+                      "id": 845,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "222:7:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": "address"
+                    },
+                    "id": 847,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "222:34:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "203:53:3"
+                },
+                {
+                  "externalReferences": [
+                    {
+                      "tokenLib": {
+                        "declaration": 844,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "403:8:3",
+                        "valueSize": 1
+                      }
+                    }
+                  ],
+                  "id": 849,
+                  "nodeType": "InlineAssembly",
+                  "operations": "{\n    let ptr := mload(0x40)\n    calldatacopy(ptr, 0, calldatasize())\n    let result := delegatecall(gas(), tokenLib, ptr, calldatasize(), 0, 0)\n    let size := returndatasize()\n    returndatacopy(ptr, 0, size)\n    switch result\n    case 0 { revert(ptr, size) }\n    default { return(ptr, size) }\n}",
+                  "src": "266:371:3"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 851,
+            "implemented": true,
+            "kind": "fallback",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 841,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "110:2:3"
+            },
+            "returnParameters": {
+              "id": 842,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "130:0:3"
+            },
+            "scope": 852,
+            "src": "101:542:3",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 853,
+        "src": "62:583:3"
+      }
+    ],
+    "src": "0:645:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-02-26T23:28:18.270Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

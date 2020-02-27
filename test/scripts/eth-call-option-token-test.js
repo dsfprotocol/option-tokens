@@ -15,12 +15,22 @@ contract('OptionTokenFactory', accounts => {
         const factory = await Factory.deployed()
         const expiration = today + 86400 * 7
         const strike = web3.utils.toWei('200').toString()
-        debugger
-        const result = await factory.writeCall(expiration, strike)
 
-        console.log('gasUsed:', result.gasUsed)
+        const result = await factory.writeCall(expiration, strike, {
+            value: web3.utils.toWei('1').toString()
+        })
+
+        console.log('gas used for new token:', result.receipt.gasUsed)
+
         const token = await ETHCallOptionToken.at(result.logs[0].args.token)
         const balance = await token.balances.call(from)
-        console.log(balance, balance.toString(), web3.utils.fromWei(balance))
+
+        expect(web3.utils.fromWei(balance)).to.eq('1')
+
+        const existingTokenResult = await factory.writeCall(expiration, strike, {
+            value: web3.utils.toWei('1').toString()
+        })
+
+        console.log('gas used for existing token:', existingTokenResult.receipt.gasUsed)
     })
 })

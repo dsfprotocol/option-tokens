@@ -30,12 +30,12 @@ contract OptionTokenFactory is Cloner {
         token.writeAsOrigin.value(msg.value)();
     }
 
-    function writeCall(uint128 expiration, uint128 strike, address approve) public payable returns (address) {
+    function writeCallAndApprove(uint128 expiration, uint128 strike, address approve) public payable returns (address) {
         ETHCallOptionToken token = findOrCreateCall(expiration, strike);
         token.writeAndApproveAsOrigin.value(msg.value)(approve);
     }
 
-    function writeCall(uint128 expiration, uint128 strike, address approve, bytes memory data) public payable returns (address) {
+    function writeCallAndApproveAndCall(uint128 expiration, uint128 strike, address approve, bytes memory data) public payable returns (address) {
         ETHCallOptionToken token = findOrCreateCall(expiration, strike);
         token.writeApproveAndCallAsOrigin.value(msg.value)(approve, data);
     }

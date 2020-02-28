@@ -4,13 +4,6 @@ import "./OptionToken.sol";
 
 
 contract ETHCallOptionToken is OptionToken {
-    function approveAndCall(address spender, uint256 quantity, bytes memory data) public returns (bool) {
-        allowed[msg.sender][spender] = quantity;
-        (bool result,) = spender.call(data);
-        require(result);
-        return true;
-    }
-
     function write() public payable returns (bool) {
         totalSupply += msg.value;
         balances[msg.sender] += msg.value;
@@ -21,14 +14,13 @@ contract ETHCallOptionToken is OptionToken {
 
     function writeAndApprove(address spender) public payable returns (bool) {
         write();
-        allowed[msg.sender][spender] += msg.value;
+        approve(spender, msg.value);
         return true;
     }
 
     function writeApproveAndCall(address to, bytes memory data) public payable returns (bool) {
-        writeAndApprove(to);
-        (bool result,) = to.call(data);
-        require(result);
+        write();
+        approveAndCall(to, msg.value, data);
         return true;
     }
 
@@ -42,14 +34,14 @@ contract ETHCallOptionToken is OptionToken {
 
     function writeAndApproveAsOrigin(address to) public payable returns (bool) {
         writeAsOrigin();
-        allowed[tx.origin][to] = msg.value;
+        approveAsOrigin(to, msg.value);
         return true;
     }
 
     function writeApproveAndCallAsOrigin(address to, bytes memory data) public payable returns (bool) {
         writeAndApproveAsOrigin(to);
         (bool result,) = to.call(data);
-        require(result);
+        require(result && allowed[tx.origin][to] < msg.value);
         return true;
     }
 

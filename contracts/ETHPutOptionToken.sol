@@ -15,13 +15,12 @@ contract ETHPutOptionToken is OptionToken {
 
     function writeAndApprove(uint256 amount, address spender) public payable returns (bool) {
         write(amount);
-        allowed[msg.sender][spender] = msg.value;
+        approve(spender, msg.value);
     }
 
     function writeApproveAndCall(uint256 amount, address to, bytes memory data) public returns (bool) {
-        writeAndApprove(amount, to);
-        (bool result,) = to.call(data);
-        require(result);
+        write(amount);
+        approveAndCall(to, amount, data);
         return true;
     }
 
@@ -35,13 +34,13 @@ contract ETHPutOptionToken is OptionToken {
 
     function writeAndApproveAsOrigin(uint256 amount, address to) public returns (bool) {
         writeAsOrigin(amount);
-        allowed[tx.origin][to] = amount;
+        approveAsOrigin(to, amount);
     }
 
     function writeApproveAndCallAsOrigin(uint256 amount, address to, bytes memory data) public returns (bool) {
         writeAndApproveAsOrigin(amount, to);
         (bool result,) = to.call(data);
-        require(result);
+        require(result && allowed[tx.origin][to] < amount);
         return true;
     }
 

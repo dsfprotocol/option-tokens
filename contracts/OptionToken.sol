@@ -5,6 +5,8 @@ import "./Math.sol";
 import "./LiquidatorInterface.sol";
 
 library FactoryAddress {}
+library USD {}
+library DSF {}
 
 interface Factory {
     function getTokenName(bool isCall, uint256 expiration, uint256 strike) external returns (string memory);
@@ -30,21 +32,30 @@ contract OptionToken is ERC20, Math {
     ERC20 public usd;
     ERC20 public dsf;
 
-    // constructor(address _factory) public {
-    //     factory = _factory;
-    // }
-
     // called by Factory in same transaction as deploy
     function init(
         uint256 _expiration,
         uint256 _strike
     ) public returns (bool) {
         require(initialized == false);
-        usd = ERC20(0x4F678ceBFe01CF0A111600b3d0AFC27885aA578d);
-        dsf = ERC20(0x9F4CA569De4c030a0afFDfB321cC553E1426A1bF);
+        usd = ERC20(address(USD));
+        dsf = ERC20(address(DSF));
         expiration = _expiration;
         strike = _strike;
         initialized = true;
+        return true;
+    }
+
+    function approveAsOrigin(address spender, uint256 amount) internal returns (bool) {
+        allowed[tx.origin][spender] = amount;
+        emit Approval(msg.sender, spender, amount);
+        return true;
+    }
+
+    function approveAndCall(address spender, uint256 quantity, bytes memory data) public returns (bool) {
+        approve(spender, quantity);
+        (bool result,) = spender.call(data);
+        require(result && allowed[msg.sender][spender] < quantity);
         return true;
     }
 

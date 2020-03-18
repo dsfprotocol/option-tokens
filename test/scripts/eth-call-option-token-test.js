@@ -30,6 +30,14 @@ contract('Call Option Tokens | OptionTokenFactory', accounts => {
         console.log('gas used for new token:', result.receipt.gasUsed)
 
         token = await ETHCallOptionToken.at(result.logs[0].args.token)
+        const name = await token.name.call()
+        const symbol = await token.symbol.call()
+
+
+        expect(name).to.match(/[A-Z]{3}\s[0-9]{1,2}\s200-CALL/)
+        expect(symbol).to.match(/[0-9]{1,2}\/[0-9]{1,2}\s200-C/)
+        console.log('created token with name:', name, 'symbol:', symbol)
+
         const balance = await token.balances.call(from)
 
         expect(web3.utils.fromWei(balance)).to.eq('1')

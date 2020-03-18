@@ -4,29 +4,70 @@ const ETHPutOptionToken = artifacts.require('ETHPutOptionToken')
 const ETHCallOptionTokenProxy = artifacts.require('ETHCallOptionTokenProxy')
 const ETHPutOptionTokenProxy = artifacts.require('ETHPutOptionTokenProxy')
 const OptionTokenFactory = artifacts.require('OptionTokenFactory')
+const DefaultBalanceToken = artifacts.require('DefaultBalanceToken')
+const DSFToken = artifacts.require('dsf-token/DecentralizedSettlementFacilityToken')
+const DateTime = artifacts.require('DateTime')
+const Namesake = artifacts.require('OptionTokenNamesake')
 
+
+const { toChecksumAddress } = require('ethereum-checksum-address')
 const RLP = require('rlp')
 
 async function doDeploy(deployer, network) {
-  await deployer.deploy(Migrations);
+  await deployer.deploy(Migrations)
+  const dsf = await deployer.deploy(DSFToken)
+  const usd = await deployer.deploy(DefaultBalanceToken)
 
   const sender = deployer.networks[network].from
-  const factoryNonce = await web3.eth.getTransactionCount(sender) + 2
+  const factoryNonce = await web3.eth.getTransactionCount(sender) + 4
   console.log('current transaction nonce: ', factoryNonce)
 
   // compute and link address of OptionTokenFactory in advance
-  const factoryAddressWillBe = "0x" + web3.utils.sha3(RLP.encode([sender,factoryNonce])).slice(12).substring(14)
+  const factoryAddressWillBe = toChecksumAddress(
+    "0x" + web3.utils.sha3(RLP.encode([sender,factoryNonce])).slice(12).substring(14)
+  )
+
+  /* link factory, USD, and DSF token to Option Token Libraries */
+
   await ETHCallOptionToken.link('FactoryAddress', factoryAddressWillBe)
+  await ETHCallOptionToken.link('DSF', dsf.address)
+  await ETHCallOptionToken.link('USD', usd.address)
+
   await ETHPutOptionToken.link('FactoryAddress', factoryAddressWillBe)
-  // TODO make the below addresses the correct factory address
+  await ETHPutOptionToken.link('DSF', dsf.address)
+  await ETHPutOptionToken.link('USD', usd.address)
+
+  /* End Link */
+
+
+  /* Deploy ETH Option Token Libraries */
+
   const callToken = await deployer.deploy(ETHCallOptionToken);
   const putToken = await deployer.deploy(ETHPutOptionToken);
 
+  /* End Deploy */
+
+  /* Deploy Namesake Contract */
+  const datetime = await deployer.deploy(DateTime)
+  await Namesake.link('DateTime', datetime.address)
+  const namesake = await deployer.deploy(Namesake)
+  /* End namesake */
+
+  /* Link Option Token Libraries to Option Token Factory */
+  await OptionTokenFactory.link('OptionTokenNamesake', namesake.address)
+  await OptionTokenFactory.link('USD', usd.address)
   await OptionTokenFactory.link('ETHCallOptionTokenAddress', callToken.address)
   await OptionTokenFactory.link('ETHPutOptionTokenAddress', putToken.address)
+  /* End Link */
+
+  /* Deploy Option Token Factory */
   const factory = await deployer.deploy(OptionTokenFactory)
 
   console.log('linked factory address:', factoryAddressWillBe, '.  actual:', factory.address)
+
+  if (factoryAddressWillBe !== factory.address) {
+    throw new Error('Deploy failed! The Option Token Factory was not deployed at the correct address!')
+  }
 }
 
 module.exports = (deployer, network) => {

@@ -10,32 +10,32 @@
   "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"fallback\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/ETHPutOptionTokenProxy.sol\":\"ETHPutOptionTokenProxy\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/ETHPutOptionTokenProxy.sol\":{\"keccak256\":\"0xfaf730de7a4ff16eec7e2ff791a95f3e666993409f90c1e57a40fce90db5e256\",\"urls\":[\"bzz-raw://071479d34e9b49c44144065b286ba742eb77bd8be7440e579c56727d33274eb0\",\"dweb:/ipfs/QmSXsMbrbAty7UpoKLYCdUEZuZox28VJLvTieNwjkTuKVB\"]}},\"version\":1}",
   "bytecode": "0x6080604052348015600f57600080fd5b5060788061001e6000396000f3fe6080604052600073__ETHPutOptionTokenAddress______________905060405136600082376000803683855af43d806000843e8160008114603f578184f35b8184fdfea265627a7a723158208fcd547ea8ccb94f499927568aa10f3b9faa8e6ed3c3c854a14cb9469b78861064736f6c63430005100032",
   "deployedBytecode": "0x6080604052600073__ETHPutOptionTokenAddress______________905060405136600082376000803683855af43d806000843e8160008114603f578184f35b8184fdfea265627a7a723158208fcd547ea8ccb94f499927568aa10f3b9faa8e6ed3c3c854a14cb9469b78861064736f6c63430005100032",
-  "sourceMap": "61:581:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;61:581:5;;;;;;;",
-  "deployedSourceMap": "61:581:5:-;;;201:16;220:33;201:52;;303:4;297:11;342:12;339:1;334:3;321:34;432:1;429;415:12;410:3;400:8;395:3;382:52;459:14;509:4;506:1;501:3;486:28;535:6;559:1;554:28;;;;617:4;612:3;605:17;554:28;575:4;570:3;563:17",
+  "sourceMap": "61:581:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;61:581:7;;;;;;;",
+  "deployedSourceMap": "61:581:7:-;;;201:16;220:33;201:52;;303:4;297:11;342:12;339:1;334:3;321:34;432:1;429;415:12;410:3;400:8;395:3;382:52;459:14;509:4;506:1;501:3;486:28;535:6;559:1;554:28;;;;617:4;612:3;605:17;554:28;575:4;570:3;563:17",
   "source": "pragma solidity ^0.5;\n\nlibrary ETHPutOptionTokenAddress {}\n\n\ncontract ETHPutOptionTokenProxy {\n    function () external payable {\n        //solium-disable-next-line security/no-inline-assembly\n        address tokenLib = address(ETHPutOptionTokenAddress);\n        assembly {\n            let ptr := mload(0x40)\n            calldatacopy(ptr, 0, calldatasize)\n            let result := delegatecall(gas, tokenLib, ptr, calldatasize, 0, 0)\n            let size := returndatasize\n            returndatacopy(ptr, 0, size)\n\n            switch result\n            case 0 { revert(ptr, size) }\n            default { return(ptr, size) }\n        }\n    }\n}",
   "sourcePath": "/Users/brianwheeler/optimum/protocol/contracts/ETHPutOptionTokenProxy.sol",
   "ast": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/ETHPutOptionTokenProxy.sol",
     "exportedSymbols": {
       "ETHPutOptionTokenAddress": [
-        1467
+        3167
       ],
       "ETHPutOptionTokenProxy": [
-        1479
+        3179
       ]
     },
-    "id": 1480,
+    "id": 3180,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1466,
+        "id": 3166,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:5"
+        "src": "0:21:7"
       },
       {
         "baseContracts": [],
@@ -43,15 +43,15 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1467,
+        "id": 3167,
         "linearizedBaseContracts": [
-          1467
+          3167
         ],
         "name": "ETHPutOptionTokenAddress",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1480,
-        "src": "23:35:5"
+        "scope": 3180,
+        "src": "23:35:7"
       },
       {
         "baseContracts": [],
@@ -59,31 +59,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1479,
+        "id": 3179,
         "linearizedBaseContracts": [
-          1479
+          3179
         ],
         "name": "ETHPutOptionTokenProxy",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1477,
+              "id": 3177,
               "nodeType": "Block",
-              "src": "128:512:5",
+              "src": "128:512:7",
               "statements": [
                 {
                   "assignments": [
-                    1471
+                    3171
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1471,
+                      "id": 3171,
                       "name": "tokenLib",
                       "nodeType": "VariableDeclaration",
-                      "scope": 1477,
-                      "src": "201:16:5",
+                      "scope": 3177,
+                      "src": "201:16:7",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -91,10 +91,10 @@
                         "typeString": "address"
                       },
                       "typeName": {
-                        "id": 1470,
+                        "id": 3170,
                         "name": "address",
                         "nodeType": "ElementaryTypeName",
-                        "src": "201:7:5",
+                        "src": "201:7:7",
                         "stateMutability": "nonpayable",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -105,20 +105,20 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1475,
+                  "id": 3175,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1473,
+                        "id": 3173,
                         "name": "ETHPutOptionTokenAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1467,
-                        "src": "228:24:5",
+                        "referencedDeclaration": 3167,
+                        "src": "228:24:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_ETHPutOptionTokenAddress_$1467_$",
+                          "typeIdentifier": "t_type$_t_contract$_ETHPutOptionTokenAddress_$3167_$",
                           "typeString": "type(library ETHPutOptionTokenAddress)"
                         }
                       }
@@ -126,24 +126,24 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_type$_t_contract$_ETHPutOptionTokenAddress_$1467_$",
+                          "typeIdentifier": "t_type$_t_contract$_ETHPutOptionTokenAddress_$3167_$",
                           "typeString": "type(library ETHPutOptionTokenAddress)"
                         }
                       ],
-                      "id": 1472,
+                      "id": 3172,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "lValueRequested": false,
                       "nodeType": "ElementaryTypeNameExpression",
-                      "src": "220:7:5",
+                      "src": "220:7:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_type$_t_address_$",
                         "typeString": "type(address)"
                       },
                       "typeName": "address"
                     },
-                    "id": 1474,
+                    "id": 3174,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -151,88 +151,88 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "220:33:5",
+                    "src": "220:33:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "201:52:5"
+                  "src": "201:52:7"
                 },
                 {
                   "externalReferences": [
                     {
                       "tokenLib": {
-                        "declaration": 1471,
+                        "declaration": 3171,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "400:8:5",
+                        "src": "400:8:7",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 1476,
+                  "id": 3176,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let ptr := mload(0x40)\n    calldatacopy(ptr, 0, calldatasize())\n    let result := delegatecall(gas(), tokenLib, ptr, calldatasize(), 0, 0)\n    let size := returndatasize()\n    returndatacopy(ptr, 0, size)\n    switch result\n    case 0 { revert(ptr, size) }\n    default { return(ptr, size) }\n}",
-                  "src": "263:371:5"
+                  "src": "263:371:7"
                 }
               ]
             },
             "documentation": null,
-            "id": 1478,
+            "id": 3178,
             "implemented": true,
             "kind": "fallback",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1468,
+              "id": 3168,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "108:2:5"
+              "src": "108:2:7"
             },
             "returnParameters": {
-              "id": 1469,
+              "id": 3169,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "128:0:5"
+              "src": "128:0:7"
             },
-            "scope": 1479,
-            "src": "99:541:5",
+            "scope": 3179,
+            "src": "99:541:7",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1480,
-        "src": "61:581:5"
+        "scope": 3180,
+        "src": "61:581:7"
       }
     ],
-    "src": "0:642:5"
+    "src": "0:642:7"
   },
   "legacyAST": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/ETHPutOptionTokenProxy.sol",
     "exportedSymbols": {
       "ETHPutOptionTokenAddress": [
-        1467
+        3167
       ],
       "ETHPutOptionTokenProxy": [
-        1479
+        3179
       ]
     },
-    "id": 1480,
+    "id": 3180,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1466,
+        "id": 3166,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:5"
+        "src": "0:21:7"
       },
       {
         "baseContracts": [],
@@ -240,15 +240,15 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1467,
+        "id": 3167,
         "linearizedBaseContracts": [
-          1467
+          3167
         ],
         "name": "ETHPutOptionTokenAddress",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1480,
-        "src": "23:35:5"
+        "scope": 3180,
+        "src": "23:35:7"
       },
       {
         "baseContracts": [],
@@ -256,31 +256,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1479,
+        "id": 3179,
         "linearizedBaseContracts": [
-          1479
+          3179
         ],
         "name": "ETHPutOptionTokenProxy",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1477,
+              "id": 3177,
               "nodeType": "Block",
-              "src": "128:512:5",
+              "src": "128:512:7",
               "statements": [
                 {
                   "assignments": [
-                    1471
+                    3171
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1471,
+                      "id": 3171,
                       "name": "tokenLib",
                       "nodeType": "VariableDeclaration",
-                      "scope": 1477,
-                      "src": "201:16:5",
+                      "scope": 3177,
+                      "src": "201:16:7",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -288,10 +288,10 @@
                         "typeString": "address"
                       },
                       "typeName": {
-                        "id": 1470,
+                        "id": 3170,
                         "name": "address",
                         "nodeType": "ElementaryTypeName",
-                        "src": "201:7:5",
+                        "src": "201:7:7",
                         "stateMutability": "nonpayable",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -302,20 +302,20 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1475,
+                  "id": 3175,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 1473,
+                        "id": 3173,
                         "name": "ETHPutOptionTokenAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1467,
-                        "src": "228:24:5",
+                        "referencedDeclaration": 3167,
+                        "src": "228:24:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_ETHPutOptionTokenAddress_$1467_$",
+                          "typeIdentifier": "t_type$_t_contract$_ETHPutOptionTokenAddress_$3167_$",
                           "typeString": "type(library ETHPutOptionTokenAddress)"
                         }
                       }
@@ -323,24 +323,24 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_type$_t_contract$_ETHPutOptionTokenAddress_$1467_$",
+                          "typeIdentifier": "t_type$_t_contract$_ETHPutOptionTokenAddress_$3167_$",
                           "typeString": "type(library ETHPutOptionTokenAddress)"
                         }
                       ],
-                      "id": 1472,
+                      "id": 3172,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "lValueRequested": false,
                       "nodeType": "ElementaryTypeNameExpression",
-                      "src": "220:7:5",
+                      "src": "220:7:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_type$_t_address_$",
                         "typeString": "type(address)"
                       },
                       "typeName": "address"
                     },
-                    "id": 1474,
+                    "id": 3174,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -348,65 +348,65 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "220:33:5",
+                    "src": "220:33:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "201:52:5"
+                  "src": "201:52:7"
                 },
                 {
                   "externalReferences": [
                     {
                       "tokenLib": {
-                        "declaration": 1471,
+                        "declaration": 3171,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "400:8:5",
+                        "src": "400:8:7",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 1476,
+                  "id": 3176,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let ptr := mload(0x40)\n    calldatacopy(ptr, 0, calldatasize())\n    let result := delegatecall(gas(), tokenLib, ptr, calldatasize(), 0, 0)\n    let size := returndatasize()\n    returndatacopy(ptr, 0, size)\n    switch result\n    case 0 { revert(ptr, size) }\n    default { return(ptr, size) }\n}",
-                  "src": "263:371:5"
+                  "src": "263:371:7"
                 }
               ]
             },
             "documentation": null,
-            "id": 1478,
+            "id": 3178,
             "implemented": true,
             "kind": "fallback",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1468,
+              "id": 3168,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "108:2:5"
+              "src": "108:2:7"
             },
             "returnParameters": {
-              "id": 1469,
+              "id": 3169,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "128:0:5"
+              "src": "128:0:7"
             },
-            "scope": 1479,
-            "src": "99:541:5",
+            "scope": 3179,
+            "src": "99:541:7",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1480,
-        "src": "61:581:5"
+        "scope": 3180,
+        "src": "61:581:7"
       }
     ],
-    "src": "0:642:5"
+    "src": "0:642:7"
   },
   "compiler": {
     "name": "solc",
@@ -414,8 +414,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-26T23:28:19.564Z",
-  "networkType": "ethereum",
+  "updatedAt": "2020-03-18T14:37:05.686Z",
   "devdoc": {
     "methods": {}
   },

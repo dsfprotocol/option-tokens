@@ -404,11 +404,11 @@
         }
       },
       "links": {},
-      "address": "0x9F4CA569De4c030a0afFDfB321cC553E1426A1bF",
-      "transactionHash": "0x700b9977b9adc925ac8fc3fb2aba8df4f600c9051eaf3defda726bdbc7c9b12b"
+      "address": "0x4F678ceBFe01CF0A111600b3d0AFC27885aA578d",
+      "transactionHash": "0xa20eff9bd9e94a9afe60cbbddaaf79fe53cb988568352b57b44bd086cbb1fbc3"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-19T15:56:21.139Z",
+  "updatedAt": "2020-02-28T18:31:35.310Z",
   "networkType": "ethereum"
 }

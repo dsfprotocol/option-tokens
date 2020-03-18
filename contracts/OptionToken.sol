@@ -2,7 +2,7 @@ pragma solidity ^0.5;
 
 import "./ERC20.sol";
 import "./Math.sol";
-import "./LiquidatorInterface.sol";
+import "./Auction.sol";
 
 library FactoryAddress {}
 library USD {}
@@ -23,14 +23,12 @@ contract OptionToken is ERC20, Math {
 
     mapping(address => uint256) public writers;
 
-    uint256 public liquidated;
+    uint256 public exercised;
     uint256 public written;
-    uint256 public redeemed;
+    uint256 public assigned;
+    uint256 public settled;
 
     uint256 public constant SETTLEMENT_DURATION = 12 hours;
-
-    ERC20 public usd;
-    ERC20 public dsf;
 
     // called by Factory in same transaction as deploy
     function init(
@@ -38,12 +36,18 @@ contract OptionToken is ERC20, Math {
         uint256 _strike
     ) public returns (bool) {
         require(initialized == false);
-        usd = ERC20(address(USD));
-        dsf = ERC20(address(DSF));
         expiration = _expiration;
         strike = _strike;
         initialized = true;
         return true;
+    }
+
+    function dsf() public pure returns (ERC20) {
+        return ERC20(address(DSF));
+    }
+
+    function usd() public pure returns (ERC20) {
+        return ERC20(address(USD));
     }
 
     function approveAsOrigin(address spender, uint256 amount) internal returns (bool) {
@@ -57,6 +61,10 @@ contract OptionToken is ERC20, Math {
         (bool result,) = spender.call(data);
         require(result && allowed[msg.sender][spender] < quantity);
         return true;
+    }
+
+    function edge(address account) public view returns (uint256) {
+        return 0.03 ether - 1 ether * 1 ether / (dsf().balanceOf(account) + 33.333333333333333333 ether);
     }
 
     function settlementStart() public view returns (uint256) {

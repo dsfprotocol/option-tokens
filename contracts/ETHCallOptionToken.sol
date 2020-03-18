@@ -5,6 +5,7 @@ import "./OptionToken.sol";
 
 contract ETHCallOptionToken is OptionToken {
     function write() public payable returns (bool) {
+        require(now < settlementStart());
         totalSupply += msg.value;
         balances[msg.sender] += msg.value;
         writers[msg.sender] += msg.value;
@@ -25,6 +26,7 @@ contract ETHCallOptionToken is OptionToken {
     }
 
     function writeAsOrigin() public payable returns (bool) {
+        require(now < settlementStart());
         totalSupply += msg.value;
         balances[tx.origin] += msg.value;
         writers[tx.origin] += msg.value;
@@ -51,6 +53,7 @@ contract ETHCallOptionToken is OptionToken {
         balances[msg.sender] -= amount;
         writers[msg.sender] -= amount;
         written -= amount;
+        totalSupply -= amount;
         msg.sender.transfer(amount);
         return true;
     }
@@ -59,48 +62,66 @@ contract ETHCallOptionToken is OptionToken {
         require(balances[msg.sender] >= amount && now < settlementStart());
         balances[msg.sender] -= amount;
         totalSupply -= amount;
-        usd.transferFrom(msg.sender, address(this), amount * strike / 1 ether);
+        exercised += amount;
+        usd().transferFrom(msg.sender, address(this), amount * strike / 1 ether);
         msg.sender.transfer(amount);
         return true;
     }
 
-    function liquidate(uint256 quantity) public {
-        uint256 elapsed = settlementEnd() - now;
-        uint256 price = strike * SETTLEMENT_DURATION / elapsed;
-        require(now < settlementEnd() && now > settlementStart() && price >= strike);
+    /** Settlement Functions
+
+        auctionPrice(), settle(), and finishSettlement() are responsible for allowing
+        settlement contracts to capitalize on the arbitrage opportunity provided in
+        the reverse dutch auction.
+     */
+
+    function settle(uint256 quantity) public {
+        quantity = min(totalSupply - settled, quantity);
+        uint256 price = auctionPrice();
         uint256 giving = quantity * price / 1 ether;
-        if (usd.balanceOf(msg.sender) >= giving) {
-            usd.transferFrom(msg.sender, address(this), giving);
-            msg.sender.transfer(quantity);
-        } else {
-            LiquidatorInterface(msg.sender).receiveETH.value(quantity)();
-            usd.transferFrom(msg.sender, address(this), giving);
-        }
-        liquidated += quantity;
+        exercised += quantity;
+        settled += quantity;
+        Auction(msg.sender).receiveETH.value(quantity)(giving);
+        usd().transferFrom(msg.sender, address(this), giving);
     }
 
-    function settle() public returns (bool) {
+    // returns price in USD for one ETH
+    function auctionPrice() public view returns (uint256) {
+        require(now > settlementStart() && now < settlementEnd());
+        uint256 elapsed = now - settlementStart();
+        uint256 e = edge(msg.sender);
+        return ((1 ether - e) * strike * SETTLEMENT_DURATION) / (1 ether * elapsed) + e * strike / 1 ether;
+    }
+
+
+    /** Allows the holder of an option-token to claim automatically exercised funds
+        afte settlement has ended.
+     */
+    function liquidate() public returns (bool) {
         require(now > settlementEnd());
-        uint256 writerSettlement = (liquidated - redeemed) * strike / 1 ether;
-        uint256 holderSettlement = usd.balanceOf(address(this)) - writerSettlement;
-        uint256 settlement = (balances[msg.sender] * 1 ether / totalSupply) * holderSettlement / 1 ether;
+        // writers are guaranteed the strike price of their options
+        uint256 writerSettlement = (exercised - assigned) * strike / 1 ether;
+        uint256 holderSettlement = usd().balanceOf(address(this)) - writerSettlement;
+        uint256 settlement = balances[msg.sender] * holderSettlement / totalSupply;
         totalSupply -= balances[msg.sender];
         balances[msg.sender] = 0;
-        usd.transfer(msg.sender, settlement);
+        usd().transfer(msg.sender, settlement);
         return true;
     }
 
-    function redeem() public returns (bool) {
+    /** Allows the writer of an option token to claim their collateral and/or assignment
+        after settlement has eneded.
+     */
+    function assignment() public returns (bool) {
         require(now > settlementEnd());
-        uint256 writerSettlementUSD = (liquidated - redeemed) * strike / 1 ether;
-        uint256 ratio = writers[msg.sender] * 1 ether / written;
-        uint256 redeemUSD = ratio * writerSettlementUSD / 1 ether;
-        uint256 redeemETH = ratio * address(this).balance / 1 ether;
+        uint256 writerSettlementUSD = (exercised - assigned) * strike / 1 ether;
+        uint256 redeemUSD = writers[msg.sender] * writerSettlementUSD / written;
+        uint256 redeemETH = writers[msg.sender] * address(this).balance / written;
         written -= writers[msg.sender];
-        redeemed += writers[msg.sender];
+        assigned += writers[msg.sender];
         writers[msg.sender] = 0;
         msg.sender.transfer(redeemETH);
-        usd.transfer(msg.sender, redeemUSD);
+        usd().transfer(msg.sender, redeemUSD);
         return true;
     }
 

@@ -5,6 +5,7 @@ import "./ETHCallOptionToken.sol";
 import "./ETHPutOptionToken.sol";
 import "./ETHCallOptionTokenProxy.sol";
 import "./ETHPutOptionTokenProxy.sol";
+import "./OptionTokenNamesake.sol";
 
 
 contract OptionTokenFactory is Cloner {
@@ -94,11 +95,11 @@ contract OptionTokenFactory is Cloner {
         return ETHPutOptionToken(token);
     }
 
-    function getTokenName(bool isCall, uint128 expiration, uint128 strike) pure external returns (string memory) {
-
+    function getTokenName(bool isCall, uint256 expiration, uint256 strike) pure external returns (string memory) {
+        return OptionTokenNamesake.name(isCall, expiration, strike);
     }
 
-    function getTokenSymbol(bool isCall, uint128 expiration, uint128 strike) pure external returns (string memory) {
-
+    function getTokenSymbol(bool isCall, uint256 expiration, uint256 strike) pure external returns (string memory) {
+        return OptionTokenNamesake.symbol(isCall, expiration, strike);
     }
 }

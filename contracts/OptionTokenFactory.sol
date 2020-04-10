@@ -50,7 +50,7 @@ contract OptionTokenFactory is Cloner {
     }
 
     function createPut(uint128 expiration, uint128 strike) public returns (address) {
-        return address(findOrCreateCall(expiration, strike));
+        return address(findOrCreatePut(expiration, strike));
     }
 
     function writePut(uint128 expiration, uint128 strike, uint128 amount) public receiveUSD(strike, amount) returns (address) {
@@ -83,12 +83,12 @@ contract OptionTokenFactory is Cloner {
 
     function findOrCreatePut(uint128 expiration, uint128 strike) internal returns (ETHPutOptionToken) {
         require(expiration > now && expiration % 86400 - 43200 == 0 && strike % 5 ether == 0 && strike > 0 ether && strike < 100000 ether);
-        address token = calls[expiration][strike];
+        address token = puts[expiration][strike];
         if (token == address(0)) {
             token = clone(putTemplate);
             ETHPutOptionToken(token).init(expiration, strike);
             usd.approve(token, uint256(-1));
-            calls[expiration][strike] = token;
+            puts[expiration][strike] = token;
         }
 
         emit OptionTokenCreated(token, false, expiration, strike);

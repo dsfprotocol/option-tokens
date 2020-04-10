@@ -1,8 +1,7 @@
 pragma solidity ^0.5;
 
-import "./ERC20.sol";
-import "./Math.sol";
 import "./Auction.sol";
+import "./ERC20.sol";
 
 library FactoryAddress {}
 library USD {}
@@ -14,7 +13,7 @@ interface Factory {
 }
 
 
-contract OptionToken is ERC20, Math {
+contract OptionToken is ERC20 {
     bool public initialized;
     // address public factory;
 

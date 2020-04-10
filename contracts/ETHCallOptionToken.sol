@@ -76,7 +76,7 @@ contract ETHCallOptionToken is OptionToken {
      */
 
     function settle(uint256 quantity) public {
-        quantity = min(totalSupply - settled, quantity);
+        require(quantity <= totalSupply - settled);
         uint256 price = auctionPrice();
         uint256 giving = quantity * price / 1 ether;
         exercised += quantity;
@@ -87,7 +87,7 @@ contract ETHCallOptionToken is OptionToken {
 
     // returns price in USD for one ETH
     function auctionPrice() public view returns (uint256) {
-        require(now > settlementStart() && now < settlementEnd());
+        require(now > settlementStart() && now <= settlementEnd());
         uint256 elapsed = now - settlementStart();
         uint256 e = edge(msg.sender);
         return ((1 ether - e) * strike * SETTLEMENT_DURATION) / (1 ether * elapsed) + e * strike / 1 ether;
@@ -109,19 +109,32 @@ contract ETHCallOptionToken is OptionToken {
         return true;
     }
 
-    /** Allows the writer of an option token to claim their collateral and/or assignment
-        after settlement has eneded.
+    /** Settles out a traders net position in an option token by returning
+        any settled value and collateral.
      */
     function assignment() public returns (bool) {
         require(now > settlementEnd());
-        uint256 writerSettlementUSD = (exercised - assigned) * strike / 1 ether;
-        uint256 redeemUSD = writers[msg.sender] * writerSettlementUSD / written;
-        uint256 redeemETH = writers[msg.sender] * address(this).balance / written;
-        written -= writers[msg.sender];
-        assigned += writers[msg.sender];
-        writers[msg.sender] = 0;
-        msg.sender.transfer(redeemETH);
-        usd().transfer(msg.sender, redeemUSD);
+
+        if (writers[msg.sender] > 0) {
+            uint256 writerSettlementUSD = (exercised - assigned) * strike / 1 ether;
+            uint256 redeemUSD = writers[msg.sender] * writerSettlementUSD / written;
+            uint256 redeemETH = writers[msg.sender] * address(this).balance / written;
+            written -= writers[msg.sender];
+            assigned += writers[msg.sender];
+            writers[msg.sender] = 0;
+            msg.sender.transfer(redeemETH);
+            usd().transfer(msg.sender, redeemUSD);
+        }
+
+        if (balanceOf(msg.sender) > 0) {
+            uint256 writerSettlementUSD = (exercised - assigned) * strike / 1 ether;
+            uint256 holderSettlementUSD = usd().balanceOf(address(this)) - writerSettlementUSD;
+            uint256 settlement = balances[msg.sender] * holderSettlementUSD / totalSupply;
+            totalSupply -= balances[msg.sender];
+            balances[msg.sender] = 0;
+            usd().transfer(msg.sender, settlement);
+        }
+
         return true;
     }
 

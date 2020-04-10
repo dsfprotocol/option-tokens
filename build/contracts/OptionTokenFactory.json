@@ -1083,7 +1083,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4507,
+                            "referencedDeclaration": 4509,
                             "src": "740:4:12",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_OptionTokenFactory_$4032",
@@ -8212,7 +8212,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4507,
+                            "referencedDeclaration": 4509,
                             "src": "740:4:12",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_OptionTokenFactory_$4032",
@@ -14765,7 +14765,7 @@
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-03-18T14:37:05.712Z",
+  "updatedAt": "2020-04-01T20:35:54.957Z",
   "devdoc": {
     "methods": {}
   },

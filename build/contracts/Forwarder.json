@@ -10,29 +10,29 @@
   "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"fallback\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/Forwarder.sol\":\"Forwarder\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/Forwarder.sol\":{\"keccak256\":\"0x866fa3eaa768f78f54def2e2b70698b0e65c391a89f14cae6cf97fb7cc8daab0\",\"urls\":[\"bzz-raw://bee2ec9cdd3c4eeacbe82d0426e9d0f2e38f4a425fea09095d23b10ca7b724c7\",\"dweb:/ipfs/QmXbD5qKCHhu69CTtBctrpkpwTaNZxmNUSa8t9zXbqwqXn\"]}},\"version\":1}",
   "bytecode": "0x6080604052348015600f57600080fd5b5060738061001e6000396000f3fe60806040526040513660008237600080368373bc7f4729e2a828ad4d6e3a7c28d43a34b585e4635af43d806000843e8160008114603a578184f35b8184fdfea265627a7a72315820625dff53fda5acefc9206dfa855a7942620fe8f5dd947df55d57b4400ac11b9e64736f6c63430005100032",
   "deployedBytecode": "0x60806040526040513660008237600080368373bc7f4729e2a828ad4d6e3a7c28d43a34b585e4635af43d806000843e8160008114603a578184f35b8184fdfea265627a7a72315820625dff53fda5acefc9206dfa855a7942620fe8f5dd947df55d57b4400ac11b9e64736f6c63430005100032",
-  "sourceMap": "24:540:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:540:6;;;;;;;",
-  "deployedSourceMap": "24:540:6:-;;;191:4;185:11;230:12;227:1;222:3;209:34;354:1;351;337:12;332:3;288:42;283:3;270:86;381:14;431:4;428:1;423:3;408:28;457:6;481:1;476:28;;;;539:4;534:3;527:17;476:28;497:4;492:3;485:17",
+  "sourceMap": "24:540:8:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:540:8;;;;;;;",
+  "deployedSourceMap": "24:540:8:-;;;191:4;185:11;230:12;227:1;222:3;209:34;354:1;351;337:12;332:3;288:42;283:3;270:86;381:14;431:4;428:1;423:3;408:28;457:6;481:1;476:28;;;;539:4;534:3;527:17;476:28;497:4;492:3;485:17",
   "source": "pragma solidity ^0.5;\n\n\ncontract Forwarder {\n    function () external payable {\n        //solium-disable-next-line security/no-inline-assembly\n        assembly {\n            let ptr := mload(0x40)\n            calldatacopy(ptr, 0, calldatasize)\n            let result := delegatecall(gas, 0xBc7f4729E2A828Ad4d6e3A7C28D43a34B585E463, ptr, calldatasize, 0, 0)\n            let size := returndatasize\n            returndatacopy(ptr, 0, size)\n\n            switch result\n            case 0 { revert(ptr, size) }\n            default { return(ptr, size) }\n        }\n    }\n}",
   "sourcePath": "/Users/brianwheeler/optimum/protocol/contracts/Forwarder.sol",
   "ast": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/Forwarder.sol",
     "exportedSymbols": {
       "Forwarder": [
-        1487
+        3187
       ]
     },
-    "id": 1488,
+    "id": 3188,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1481,
+        "id": 3181,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:6"
+        "src": "0:21:8"
       },
       {
         "baseContracts": [],
@@ -40,79 +40,79 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1487,
+        "id": 3187,
         "linearizedBaseContracts": [
-          1487
+          3187
         ],
         "name": "Forwarder",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1485,
+              "id": 3185,
               "nodeType": "Block",
-              "src": "78:484:6",
+              "src": "78:484:8",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 1484,
+                  "id": 3184,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let ptr := mload(0x40)\n    calldatacopy(ptr, 0, calldatasize())\n    let result := delegatecall(gas(), 0xBc7f4729E2A828Ad4d6e3A7C28D43a34B585E463, ptr, calldatasize(), 0, 0)\n    let size := returndatasize()\n    returndatacopy(ptr, 0, size)\n    switch result\n    case 0 { revert(ptr, size) }\n    default { return(ptr, size) }\n}",
-                  "src": "151:405:6"
+                  "src": "151:405:8"
                 }
               ]
             },
             "documentation": null,
-            "id": 1486,
+            "id": 3186,
             "implemented": true,
             "kind": "fallback",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1482,
+              "id": 3182,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "58:2:6"
+              "src": "58:2:8"
             },
             "returnParameters": {
-              "id": 1483,
+              "id": 3183,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "78:0:6"
+              "src": "78:0:8"
             },
-            "scope": 1487,
-            "src": "49:513:6",
+            "scope": 3187,
+            "src": "49:513:8",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1488,
-        "src": "24:540:6"
+        "scope": 3188,
+        "src": "24:540:8"
       }
     ],
-    "src": "0:564:6"
+    "src": "0:564:8"
   },
   "legacyAST": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/Forwarder.sol",
     "exportedSymbols": {
       "Forwarder": [
-        1487
+        3187
       ]
     },
-    "id": 1488,
+    "id": 3188,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1481,
+        "id": 3181,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:6"
+        "src": "0:21:8"
       },
       {
         "baseContracts": [],
@@ -120,59 +120,59 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1487,
+        "id": 3187,
         "linearizedBaseContracts": [
-          1487
+          3187
         ],
         "name": "Forwarder",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 1485,
+              "id": 3185,
               "nodeType": "Block",
-              "src": "78:484:6",
+              "src": "78:484:8",
               "statements": [
                 {
                   "externalReferences": [],
-                  "id": 1484,
+                  "id": 3184,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    let ptr := mload(0x40)\n    calldatacopy(ptr, 0, calldatasize())\n    let result := delegatecall(gas(), 0xBc7f4729E2A828Ad4d6e3A7C28D43a34B585E463, ptr, calldatasize(), 0, 0)\n    let size := returndatasize()\n    returndatacopy(ptr, 0, size)\n    switch result\n    case 0 { revert(ptr, size) }\n    default { return(ptr, size) }\n}",
-                  "src": "151:405:6"
+                  "src": "151:405:8"
                 }
               ]
             },
             "documentation": null,
-            "id": 1486,
+            "id": 3186,
             "implemented": true,
             "kind": "fallback",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1482,
+              "id": 3182,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "58:2:6"
+              "src": "58:2:8"
             },
             "returnParameters": {
-              "id": 1483,
+              "id": 3183,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "78:0:6"
+              "src": "78:0:8"
             },
-            "scope": 1487,
-            "src": "49:513:6",
+            "scope": 3187,
+            "src": "49:513:8",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1488,
-        "src": "24:540:6"
+        "scope": 3188,
+        "src": "24:540:8"
       }
     ],
-    "src": "0:564:6"
+    "src": "0:564:8"
   },
   "compiler": {
     "name": "solc",
@@ -180,7 +180,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-26T15:46:54.700Z",
+  "updatedAt": "2020-04-01T20:35:54.930Z",
   "devdoc": {
     "methods": {}
   },

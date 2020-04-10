@@ -1139,7 +1139,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4495,
+                            "referencedDeclaration": 4499,
                             "src": "367:4:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -2431,7 +2431,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4495,
+                            "referencedDeclaration": 4499,
                             "src": "1081:4:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -5680,7 +5680,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4495,
+                              "referencedDeclaration": 4499,
                               "src": "2679:4:6",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -6908,7 +6908,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4495,
+                              "referencedDeclaration": 4499,
                               "src": "3250:4:6",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -8464,7 +8464,7 @@
                                       "name": "this",
                                       "nodeType": "Identifier",
                                       "overloadedDeclarations": [],
-                                      "referencedDeclaration": 4495,
+                                      "referencedDeclaration": 4499,
                                       "src": "4203:4:6",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -10760,7 +10760,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4495,
+                            "referencedDeclaration": 4499,
                             "src": "367:4:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -12052,7 +12052,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4495,
+                            "referencedDeclaration": 4499,
                             "src": "1081:4:6",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -15301,7 +15301,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4495,
+                              "referencedDeclaration": 4499,
                               "src": "2679:4:6",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -16529,7 +16529,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4495,
+                              "referencedDeclaration": 4499,
                               "src": "3250:4:6",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -18085,7 +18085,7 @@
                                       "name": "this",
                                       "nodeType": "Identifier",
                                       "overloadedDeclarations": [],
-                                      "referencedDeclaration": 4495,
+                                      "referencedDeclaration": 4499,
                                       "src": "4203:4:6",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_contract$_ETHPutOptionToken_$3164",
@@ -20199,7 +20199,7 @@
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-03-18T14:37:05.673Z",
+  "updatedAt": "2020-04-01T20:35:54.910Z",
   "devdoc": {
     "methods": {}
   },

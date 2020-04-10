@@ -4454,7 +4454,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4489,
+                            "referencedDeclaration": 4493,
                             "src": "2110:4:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_ETHCallOptionToken_$2452",
@@ -5476,7 +5476,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4489,
+                            "referencedDeclaration": 4493,
                             "src": "2822:4:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_ETHCallOptionToken_$2452",
@@ -6785,7 +6785,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4489,
+                              "referencedDeclaration": 4493,
                               "src": "3638:4:4",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_ETHCallOptionToken_$2452",
@@ -8013,7 +8013,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4489,
+                              "referencedDeclaration": 4493,
                               "src": "4348:4:4",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_ETHCallOptionToken_$2452",
@@ -12769,7 +12769,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4489,
+                            "referencedDeclaration": 4493,
                             "src": "2110:4:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_ETHCallOptionToken_$2452",
@@ -13791,7 +13791,7 @@
                             "name": "this",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4489,
+                            "referencedDeclaration": 4493,
                             "src": "2822:4:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_contract$_ETHCallOptionToken_$2452",
@@ -15100,7 +15100,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4489,
+                              "referencedDeclaration": 4493,
                               "src": "3638:4:4",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_ETHCallOptionToken_$2452",
@@ -16328,7 +16328,7 @@
                               "name": "this",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4489,
+                              "referencedDeclaration": 4493,
                               "src": "4348:4:4",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_ETHCallOptionToken_$2452",
@@ -17552,7 +17552,7 @@
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-03-18T14:37:05.642Z",
+  "updatedAt": "2020-04-01T20:35:54.880Z",
   "devdoc": {
     "methods": {}
   },

@@ -4,29 +4,29 @@
   "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/Cloner.sol\":\"Cloner\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/Cloner.sol\":{\"keccak256\":\"0x5c06853f1f661ff21eb4971ab045b8f7ec8c1397bd8e93e9c45087f74787ea6b\",\"urls\":[\"bzz-raw://fe4bbec096b808dad975969ba514b93682e9364321aca0e94e275fc7eec14e4f\",\"dweb:/ipfs/QmfLXXEoSeD8c9NL8LLzTUE5fFA3Enyh1nYpwVJfz3Eq7X\"]}},\"version\":1}",
   "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820b5a2cacd86e26a79947d2845ea6ee9fae0f41bbaddf750414b10947be1fe672d64736f6c63430005100032",
   "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820b5a2cacd86e26a79947d2845ea6ee9fae0f41bbaddf750414b10947be1fe672d64736f6c63430005100032",
-  "sourceMap": "24:2441:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:2441:0;;;;;;;",
-  "deployedSourceMap": "24:2441:0:-;;;;;",
+  "sourceMap": "24:2441:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:2441:1;;;;;;;",
+  "deployedSourceMap": "24:2441:1:-;;;;;",
   "source": "pragma solidity ^0.5;\n\n\ncontract Cloner {\n    function clone(address a) internal returns (address){\n\n        /*\n\n        Assembly of the code that we want to use as init-code in the new contract, \n        along with stack values:\n                        # bottom [ STACK ] top\n        PUSH1 00       # [ 0 ]\n        DUP1           # [ 0, 0 ]\n        PUSH20         \n        <address>      # [0,0, address] \n        DUP1       # [0,0, address ,address]\n        EXTCODESIZE    # [0,0, address, size ]\n        DUP1           # [0,0, address, size, size]\n        SWAP4          # [ size, 0, address, size, 0]\n        DUP1           # [ size, 0, address ,size, 0,0]\n        SWAP2          # [ size, 0, address, 0, 0, size]\n        SWAP3          # [ size, 0, size, 0, 0, address]\n        EXTCODECOPY    # [ size, 0]\n        RETURN \n\n        The code above weighs in at 33 bytes, which is _just_ above fitting into a uint. \n        So a modified version is used, where the initial PUSH1 00 is replaced by `PC`. \n        This is one byte smaller, and also a bit cheaper Wbase instead of Wverylow. It only costs 2 gas.\n\n        PC             # [ 0 ]\n        DUP1           # [ 0, 0 ]\n        PUSH20         \n        <address>      # [0,0, address] \n        DUP1       # [0,0, address ,address]\n        EXTCODESIZE    # [0,0, address, size ]\n        DUP1           # [0,0, address, size, size]\n        SWAP4          # [ size, 0, address, size, 0]\n        DUP1           # [ size, 0, address ,size, 0,0]\n        SWAP2          # [ size, 0, address, 0, 0, size]\n        SWAP3          # [ size, 0, size, 0, 0, address]\n        EXTCODECOPY    # [ size, 0]\n        RETURN \n\n        The opcodes are:\n        58 80 73 <address> 80 3b 80 93 80 91 92 3c F3\n        We get <address> in there by OR:ing the upshifted address into the 0-filled space. \n        5880730000000000000000000000000000000000000000803b80938091923cF3 \n        +000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx000000000000000000\n        -----------------------------------------------------------------\n        588073xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx00000803b80938091923cF3\n\n        This is simply stored at memory position 0, and create is invoked. \n\n        */\n        address retval;\n        assembly{\n            mstore(0x0, or (0x5880730000000000000000000000000000000000000000803b80938091923cF3 ,mul(a,0x1000000000000000000)))\n            retval := create(0,0, 32)\n        }\n        return retval;\n    }\n}",
   "sourcePath": "/Users/brianwheeler/optimum/protocol/contracts/Cloner.sol",
   "ast": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/Cloner.sol",
     "exportedSymbols": {
       "Cloner": [
-        16
+        29
       ]
     },
-    "id": 17,
+    "id": 30,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1,
+        "id": 14,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:0"
+        "src": "0:21:1"
       },
       {
         "baseContracts": [],
@@ -34,31 +34,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 16,
+        "id": 29,
         "linearizedBaseContracts": [
-          16
+          29
         ],
         "name": "Cloner",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 14,
+              "id": 27,
               "nodeType": "Block",
-              "src": "98:2365:0",
+              "src": "98:2365:1",
               "statements": [
                 {
                   "assignments": [
-                    9
+                    22
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 9,
+                      "id": 22,
                       "name": "retval",
                       "nodeType": "VariableDeclaration",
-                      "scope": 14,
-                      "src": "2226:14:0",
+                      "scope": 27,
+                      "src": "2226:14:1",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -66,10 +66,10 @@
                         "typeString": "address"
                       },
                       "typeName": {
-                        "id": 8,
+                        "id": 21,
                         "name": "address",
                         "nodeType": "ElementaryTypeName",
-                        "src": "2226:7:0",
+                        "src": "2226:7:1",
                         "stateMutability": "nonpayable",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -80,76 +80,76 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 10,
+                  "id": 23,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "2226:14:0"
+                  "src": "2226:14:1"
                 },
                 {
                   "externalReferences": [
                     {
-                      "retval": {
-                        "declaration": 9,
+                      "a": {
+                        "declaration": 16,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "2399:6:0",
+                        "src": "2360:1:1",
                         "valueSize": 1
                       }
                     },
                     {
-                      "a": {
-                        "declaration": 3,
+                      "retval": {
+                        "declaration": 22,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "2360:1:0",
+                        "src": "2399:6:1",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 11,
+                  "id": 24,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, or(0x5880730000000000000000000000000000000000000000803b80938091923cF3, mul(a, 0x1000000000000000000)))\n    retval := create(0, 0, 32)\n}",
-                  "src": "2250:184:0"
+                  "src": "2250:184:1"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 12,
+                    "id": 25,
                     "name": "retval",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 9,
-                    "src": "2450:6:0",
+                    "referencedDeclaration": 22,
+                    "src": "2450:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 7,
-                  "id": 13,
+                  "functionReturnParameters": 20,
+                  "id": 26,
                   "nodeType": "Return",
-                  "src": "2443:13:0"
+                  "src": "2443:13:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 15,
+            "id": 28,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "clone",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4,
+              "id": 17,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3,
+                  "id": 16,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 15,
-                  "src": "61:9:0",
+                  "scope": 28,
+                  "src": "61:9:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -157,10 +157,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2,
+                    "id": 15,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "61:7:0",
+                    "src": "61:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -171,19 +171,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "60:11:0"
+              "src": "60:11:1"
             },
             "returnParameters": {
-              "id": 7,
+              "id": 20,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 6,
+                  "id": 19,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 15,
-                  "src": "90:7:0",
+                  "scope": 28,
+                  "src": "90:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -191,10 +191,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 5,
+                    "id": 18,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "90:7:0",
+                    "src": "90:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -205,40 +205,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "89:9:0"
+              "src": "89:9:1"
             },
-            "scope": 16,
-            "src": "46:2417:0",
+            "scope": 29,
+            "src": "46:2417:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 17,
-        "src": "24:2441:0"
+        "scope": 30,
+        "src": "24:2441:1"
       }
     ],
-    "src": "0:2465:0"
+    "src": "0:2465:1"
   },
   "legacyAST": {
     "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/Cloner.sol",
     "exportedSymbols": {
       "Cloner": [
-        16
+        29
       ]
     },
-    "id": 17,
+    "id": 30,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1,
+        "id": 14,
         "literals": [
           "solidity",
           "^",
           "0.5"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:21:0"
+        "src": "0:21:1"
       },
       {
         "baseContracts": [],
@@ -246,31 +246,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 16,
+        "id": 29,
         "linearizedBaseContracts": [
-          16
+          29
         ],
         "name": "Cloner",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 14,
+              "id": 27,
               "nodeType": "Block",
-              "src": "98:2365:0",
+              "src": "98:2365:1",
               "statements": [
                 {
                   "assignments": [
-                    9
+                    22
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 9,
+                      "id": 22,
                       "name": "retval",
                       "nodeType": "VariableDeclaration",
-                      "scope": 14,
-                      "src": "2226:14:0",
+                      "scope": 27,
+                      "src": "2226:14:1",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -278,10 +278,10 @@
                         "typeString": "address"
                       },
                       "typeName": {
-                        "id": 8,
+                        "id": 21,
                         "name": "address",
                         "nodeType": "ElementaryTypeName",
-                        "src": "2226:7:0",
+                        "src": "2226:7:1",
                         "stateMutability": "nonpayable",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -292,76 +292,76 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 10,
+                  "id": 23,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "2226:14:0"
+                  "src": "2226:14:1"
                 },
                 {
                   "externalReferences": [
                     {
-                      "retval": {
-                        "declaration": 9,
+                      "a": {
+                        "declaration": 16,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "2399:6:0",
+                        "src": "2360:1:1",
                         "valueSize": 1
                       }
                     },
                     {
-                      "a": {
-                        "declaration": 3,
+                      "retval": {
+                        "declaration": 22,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "2360:1:0",
+                        "src": "2399:6:1",
                         "valueSize": 1
                       }
                     }
                   ],
-                  "id": 11,
+                  "id": 24,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    mstore(0x0, or(0x5880730000000000000000000000000000000000000000803b80938091923cF3, mul(a, 0x1000000000000000000)))\n    retval := create(0, 0, 32)\n}",
-                  "src": "2250:184:0"
+                  "src": "2250:184:1"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 12,
+                    "id": 25,
                     "name": "retval",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 9,
-                    "src": "2450:6:0",
+                    "referencedDeclaration": 22,
+                    "src": "2450:6:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 7,
-                  "id": 13,
+                  "functionReturnParameters": 20,
+                  "id": 26,
                   "nodeType": "Return",
-                  "src": "2443:13:0"
+                  "src": "2443:13:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 15,
+            "id": 28,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "clone",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4,
+              "id": 17,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3,
+                  "id": 16,
                   "name": "a",
                   "nodeType": "VariableDeclaration",
-                  "scope": 15,
-                  "src": "61:9:0",
+                  "scope": 28,
+                  "src": "61:9:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -369,10 +369,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 2,
+                    "id": 15,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "61:7:0",
+                    "src": "61:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -383,19 +383,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "60:11:0"
+              "src": "60:11:1"
             },
             "returnParameters": {
-              "id": 7,
+              "id": 20,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 6,
+                  "id": 19,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 15,
-                  "src": "90:7:0",
+                  "scope": 28,
+                  "src": "90:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -403,10 +403,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 5,
+                    "id": 18,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "90:7:0",
+                    "src": "90:7:1",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -417,20 +417,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "89:9:0"
+              "src": "89:9:1"
             },
-            "scope": 16,
-            "src": "46:2417:0",
+            "scope": 29,
+            "src": "46:2417:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 17,
-        "src": "24:2441:0"
+        "scope": 30,
+        "src": "24:2441:1"
       }
     ],
-    "src": "0:2465:0"
+    "src": "0:2465:1"
   },
   "compiler": {
     "name": "solc",
@@ -438,7 +438,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-15T15:25:16.624Z",
+  "updatedAt": "2020-04-01T20:35:54.813Z",
   "devdoc": {
     "methods": {}
   },

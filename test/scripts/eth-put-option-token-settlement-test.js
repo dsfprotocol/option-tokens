@@ -135,8 +135,7 @@ contract('Put Option Tokens | Settlement', accounts => {
         console.log('gas used for holder #assignment:', result.receipt.gasUsed)
         const usdBalanceIs = await usd.balanceOf(holder)
         const diff = fromWei(usdBalanceIs.sub(usdBalanceWas))
-        debugger
-        // expect(parseFloat(diff)).to.be.closeTo(9.85, 0.05)
+        expect(parseFloat(diff)).to.be.closeTo(1000006.6, 0.01)
     })
 
     it('will transfer writer settlement to writer', async () => {

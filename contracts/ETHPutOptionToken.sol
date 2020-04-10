@@ -70,28 +70,29 @@ contract ETHPutOptionToken is OptionToken {
         return true;
     }
 
-    // Holder   
-    function liquidate() public returns (bool) {
+    function assignment() public returns (bool) {
         require(now > settlementEnd());
-        uint256 writerSettlement = (written - exercised) * strike / 1 ether;
-        uint256 holderSettlement = usd().balanceOf(address(this)) - writerSettlement;
-        uint256 settlement = balances[msg.sender] * holderSettlement / totalSupply;
-        totalSupply -= balances[msg.sender];
-        balances[msg.sender] = 0;
-        usd().transfer(msg.sender, settlement);
-        return true;
-    }
 
-    function assign() public returns (bool) {
-        require(now > settlementEnd());
-        uint256 writerSettlementUSD = (written - exercised) * strike / 1 ether;
-        uint256 redeemUSD = writers[msg.sender] * writerSettlementUSD / written;
-        uint256 redeemETH = writers[msg.sender] * address(this).balance / written;
-        written -= writers[msg.sender];
-        assigned += writers[msg.sender];
-        writers[msg.sender] = 0;
-        msg.sender.transfer(redeemETH);
-        usd().transfer(msg.sender, redeemUSD);
+        if (writers[msg.sender] > 0) {
+            uint256 writerSettlementUSD = (written - exercised) * strike / 1 ether;
+            uint256 redeemUSD = writers[msg.sender] * writerSettlementUSD / written;
+            uint256 redeemETH = writers[msg.sender] * address(this).balance / written;
+            written -= writers[msg.sender];
+            assigned += writers[msg.sender];
+            writers[msg.sender] = 0;
+            msg.sender.transfer(redeemETH);
+            usd().transfer(msg.sender, redeemUSD);
+        }
+
+        if (balanceOf(msg.sender) > 0) {
+            uint256 writerSettlementUSD = (written - exercised) * strike / 1 ether;
+            uint256 holderSettlement = usd().balanceOf(address(this)) - writerSettlementUSD;
+            uint256 settlement = balances[msg.sender] * holderSettlement / totalSupply;
+            totalSupply -= balances[msg.sender];
+            balances[msg.sender] = 0;
+            usd().transfer(msg.sender, settlement);
+        }
+
         return true;
     }
 
@@ -104,28 +105,27 @@ contract ETHPutOptionToken is OptionToken {
 
     function settle(uint256 quantity) public {
         uint256 price = auctionPrice();
-        quantity = min(totalSupply - settled, quantity);
-        uint256 usdAmount = quantity * strike / 1 ether;
-        uint256 giving = usdAmount * price / 1 ether;
-        ethOwed[msg.sender] = giving;
+        require(quantity <= totalSupply - settled);
+        uint256 usdAmount = quantity * 1 ether / price;
+        ethOwed[msg.sender] = quantity;
         usd().approve(msg.sender, usdAmount);
         Auction(msg.sender).receiveUSD(quantity);
-        require(ethOwed[msg.sender] == 0 && usd().allowed(address(this), msg.sender) == 0 && price > (1 ether * 1 ether) / strike);
+        require(ethOwed[msg.sender] == 0 && usd().allowed(address(this), msg.sender) == 0 && price >= (1 ether * 1 ether) / strike);
         exercised += quantity;
         settled += quantity;
     }
 
     function finalizeSettlement() public payable {
         require(msg.value == ethOwed[msg.sender]);
-        ethOwed[msg.sender] == 0;
+        ethOwed[msg.sender] = 0;
     }
 
     // returns the price in ETH for one USD.
     function auctionPrice() public view returns (uint256) {
+        require(now > settlementStart() && now <= settlementEnd());
         uint256 elapsed = now - settlementStart();
-        require(now > settlementStart() && now < settlementEnd());
         uint256 e = edge(msg.sender);
-        return ((1 ether - e) * SETTLEMENT_DURATION) / (strike * elapsed) + e * 1 ether / strike;
+        return (1 ether * (1 ether - e) * SETTLEMENT_DURATION) / (strike * elapsed) + e * 1 ether / strike;
     }
 
 

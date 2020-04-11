@@ -115,7 +115,7 @@ contract('Call Option Tokens | Settlement', accounts => {
     })
 
     it('will fail settlement if the settlement period has ended', async () => {
-        increaseTime(expiration + 3600 * 12)
+        increaseTime(expiration + 3600 * 12 + 1)
 
         let txFailed = false
         try {
@@ -127,7 +127,6 @@ contract('Call Option Tokens | Settlement', accounts => {
     })
 
     it('will transfer holder settlement to the holder', async () => {
-        await increaseTime(expiration + 3600 * 12 + 1)
         const usdBalanceWas = await usd.balanceOf(holder)
         let result = await token.assignment({ from: holder })
         console.log('gas used for holder #assignment:', result.receipt.gasUsed)

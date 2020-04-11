@@ -6,7 +6,7 @@ const USD = artifacts.require('DefaultBalanceToken')
 const AuctionParticipant = artifacts.require('AuctionParticipant')
 const DSFToken = artifacts.require('dsf-token/DecentralizedSettlementFacilityToken')
 
-const { toBN, fromWei, toWei } = web3.utils
+const { fromWei, toWei } = web3.utils
 
 console.log('Begin settlement test.')
 
@@ -54,13 +54,14 @@ contract('Put Option Tokens | Settlement', accounts => {
         } catch (e) {
             // expect the VM to throw, as the auction has not started yet
             expect(e.message).to.include('VM Exception')
-        }
+        }        
     })
 
     it('has a really high price at t=1', async () => {
         const block = await increaseTime(expiration + 1)
         const elapsed = block.timestamp - expiration
         const price = await token.auctionPrice()
+        console.log('elapsed:', elapsed)
         const wei = fromWei(price)
         const expectedPrice = 0.97001 * 43200 / (100 * elapsed) + 0.02999 / 100
         expect(parseFloat(wei)).to.be.closeTo(expectedPrice, 0.5)

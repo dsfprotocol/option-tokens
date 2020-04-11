@@ -7,7 +7,7 @@ const USD = artifacts.require('DefaultBalanceToken')
 const AuctionParticipant = artifacts.require('AuctionParticipant')
 const DSFToken = artifacts.require('dsf-token/DecentralizedSettlementFacilityToken')
 
-const { toBN, fromWei, toWei } = web3.utils
+const { fromWei, toWei } = web3.utils
 
 console.log('Begin settlement test.')
 

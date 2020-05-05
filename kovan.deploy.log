@@ -1,0 +1,115 @@
+1_initial_migration.js
+======================
+kovan
+
+   Replacing 'Migrations'
+   ----------------------
+   > transaction hash:    0xd85792674ba07c1c2f4fe452808faf311c2c958fa5def67ff1fbceee99185180
+   > Blocks: 1            Seconds: 4
+   > contract address:    0xaD3D45593C047dabE4298dAF438318e51120e1ad
+   > block number:        18366737
+   > block timestamp:     1588698544
+   > account:             0xBCCBbd2f4B3935897024324940bcCFc81A590B41
+   > balance:             0.629055437
+   > gas used:            225237
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00450474 ETH
+
+
+   Replacing 'DecentralizedSettlementFacilityToken'
+   ------------------------------------------------
+   > transaction hash:    0x9485db44a840fe83e9035350f8a75794855401739cbb86036e37d7b33661689f
+   > Blocks: 2            Seconds: 4
+   > contract address:    0x446492E621eD2376717B902f1412626419849e88
+   > block number:        18366739
+   > block timestamp:     1588698552
+   > account:             0xBCCBbd2f4B3935897024324940bcCFc81A590B41
+   > balance:             0.611333257
+   > gas used:            886109
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.01772218 ETH
+
+current transaction nonce:  161
+
+   Replacing 'ETHCallOptionToken'
+   ------------------------------
+   > transaction hash:    0xf850bc0d83007eab0551f2367ee167b07cb936d965b8bbdf2541c0abc5d8727a
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x2bEe2A340002c62687D3b73ba9F902ad5055F8f5
+   > block number:        18366741
+   > block timestamp:     1588698560
+   > account:             0xBCCBbd2f4B3935897024324940bcCFc81A590B41
+   > balance:             0.557446557
+   > gas used:            2694335
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0538867 ETH
+
+
+   Replacing 'ETHPutOptionToken'
+   -----------------------------
+   > transaction hash:    0x957b10d3588979a920be310bc18c8a9080da2a0d7bf5c7fa8ef34e409889566e
+   > Blocks: 2            Seconds: 4
+   > contract address:    0x3901e85F1a2e8cA173BAe3cDEE37d64DE5ba72c3
+   > block number:        18366743
+   > block timestamp:     1588698568
+   > account:             0xBCCBbd2f4B3935897024324940bcCFc81A590B41
+   > balance:             0.501453757
+   > gas used:            2799640
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0559928 ETH
+
+
+   Replacing 'DateTime'
+   --------------------
+   > transaction hash:    0x33eef404237463c515f6d4573f08571e21faf25a9e35d5fd77ab0e29d47ba93b
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x6621f99e9d64a099B6aae133CB7A0af9F83DaED5
+   > block number:        18366745
+   > block timestamp:     1588698576
+   > account:             0xBCCBbd2f4B3935897024324940bcCFc81A590B41
+   > balance:             0.500019477
+   > gas used:            71714
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.00143428 ETH
+
+
+   Replacing 'OptionTokenNamesake'
+   -------------------------------
+   > transaction hash:    0x60a3cb8c238423514f50d86f542f8ad1040a5ed6db781218a7bf361dc893560a
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x3DC3265408e6F850273D3932BBe4D32f43EF4E8d
+   > block number:        18366746
+   > block timestamp:     1588698580
+   > account:             0xBCCBbd2f4B3935897024324940bcCFc81A590B41
+   > balance:             0.483771377
+   > gas used:            812405
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0162481 ETH
+
+
+   Replacing 'OptionTokenFactory'
+   ------------------------------
+   > transaction hash:    0x1c23c7507b7c7d50da9feb151f4b60bc86fa39b7b0e7df024755ac3405e3e7c6
+   > Blocks: 1            Seconds: 4
+   > contract address:    0xee5DEBe3CE86Aea084fDEC773836bF8EBead6173
+   > block number:        18366748
+   > block timestamp:     1588698588
+   > account:             0xBCCBbd2f4B3935897024324940bcCFc81A590B41
+   > balance:             0.442029457
+   > gas used:            2087096
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.04174192 ETH
+
+linked factory address: 0xee5DEBe3CE86Aea084fDEC773836bF8EBead6173 .  actual: 0xee5DEBe3CE86Aea084fDEC773836bF8EBead6173
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.19153072 ETH

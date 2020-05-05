@@ -11,7 +11,13 @@
         }
       ],
       "name": "receiveETH",
-      "outputs": [],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "payable": true,
       "stateMutability": "payable",
       "type": "function"
@@ -26,27 +32,33 @@
         }
       ],
       "name": "receiveUSD",
-      "outputs": [],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"expectingUSD\",\"type\":\"uint256\"}],\"name\":\"receiveETH\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"expectingETH\",\"type\":\"uint256\"}],\"name\":\"receiveUSD\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/optimum/protocol/contracts/Auction.sol\":\"Auction\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/optimum/protocol/contracts/Auction.sol\":{\"keccak256\":\"0x77dea5ff010a0694623bf7843f5d80f42132e96ea0991a9964c32ef515946751\",\"urls\":[\"bzz-raw://7f0fce622af57ac5df32e5a127f2ba95c04978a773266dd19388d9a8c714af6e\",\"dweb:/ipfs/QmcitYgxhomHp8PrxmDQNyDhkSvZp5w5wGRwovrcbWrJKk\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"expectingUSD\",\"type\":\"uint256\"}],\"name\":\"receiveETH\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"expectingETH\",\"type\":\"uint256\"}],\"name\":\"receiveUSD\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol\":\"Auction\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol\":{\"keccak256\":\"0xb85f67ca3ab72d6ec79896a3acc2c7f853a373506a72b67c3550c3bfc9d96084\",\"urls\":[\"bzz-raw://2ab4e87e778af4619fc3cbcc51100777500d466620b8d2aa9e380f6e68fab252\",\"dweb:/ipfs/QmZXWtF1ViuqW8pgqg9agyHG6EBPCSnPsekRVZyvVXXKG1\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.5;\n\n\ninterface Auction {\n    function receiveETH(uint256 expectingUSD) external payable;\n    function receiveUSD(uint256 expectingETH) external;\n}",
-  "sourcePath": "/Users/brianwheeler/optimum/protocol/contracts/Auction.sol",
+  "source": "pragma solidity ^0.5;\n\n\ninterface Auction {\n    function receiveETH(uint256 expectingUSD) external payable returns (bool);\n    function receiveUSD(uint256 expectingETH) external returns (bool);\n}",
+  "sourcePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol",
   "ast": {
-    "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/Auction.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol",
     "exportedSymbols": {
       "Auction": [
-        12
+        16
       ]
     },
-    "id": 13,
+    "id": 17,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -65,9 +77,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 12,
+        "id": 16,
         "linearizedBaseContracts": [
-          12
+          16
         ],
         "name": "Auction",
         "nodeType": "ContractDefinition",
@@ -75,7 +87,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 6,
+            "id": 8,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -90,7 +102,7 @@
                   "id": 3,
                   "name": "expectingUSD",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6,
+                  "scope": 8,
                   "src": "68:20:0",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -115,13 +127,40 @@
               "src": "67:22:0"
             },
             "returnParameters": {
-              "id": 5,
+              "id": 7,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "106:0:0"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 8,
+                  "src": "116:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "116:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "115:6:0"
             },
-            "scope": 12,
-            "src": "48:59:0",
+            "scope": 16,
+            "src": "48:74:0",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
@@ -129,23 +168,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 11,
+            "id": 15,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveUSD",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 9,
+              "id": 11,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8,
+                  "id": 10,
                   "name": "expectingETH",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11,
-                  "src": "132:20:0",
+                  "scope": 15,
+                  "src": "147:20:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -153,10 +192,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 7,
+                    "id": 9,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "132:7:0",
+                    "src": "147:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -166,35 +205,62 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "131:22:0"
+              "src": "146:22:0"
             },
             "returnParameters": {
-              "id": 10,
+              "id": 14,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "162:0:0"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15,
+                  "src": "187:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 12,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "187:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "186:6:0"
             },
-            "scope": 12,
-            "src": "112:51:0",
+            "scope": 16,
+            "src": "127:66:0",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 13,
-        "src": "24:141:0"
+        "scope": 17,
+        "src": "24:171:0"
       }
     ],
-    "src": "0:165:0"
+    "src": "0:195:0"
   },
   "legacyAST": {
-    "absolutePath": "/Users/brianwheeler/optimum/protocol/contracts/Auction.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol",
     "exportedSymbols": {
       "Auction": [
-        12
+        16
       ]
     },
-    "id": 13,
+    "id": 17,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -213,9 +279,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 12,
+        "id": 16,
         "linearizedBaseContracts": [
-          12
+          16
         ],
         "name": "Auction",
         "nodeType": "ContractDefinition",
@@ -223,7 +289,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 6,
+            "id": 8,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -238,7 +304,7 @@
                   "id": 3,
                   "name": "expectingUSD",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6,
+                  "scope": 8,
                   "src": "68:20:0",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -263,13 +329,40 @@
               "src": "67:22:0"
             },
             "returnParameters": {
-              "id": 5,
+              "id": 7,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "106:0:0"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 6,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 8,
+                  "src": "116:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "116:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "115:6:0"
             },
-            "scope": 12,
-            "src": "48:59:0",
+            "scope": 16,
+            "src": "48:74:0",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
@@ -277,23 +370,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 11,
+            "id": 15,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveUSD",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 9,
+              "id": 11,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8,
+                  "id": 10,
                   "name": "expectingETH",
                   "nodeType": "VariableDeclaration",
-                  "scope": 11,
-                  "src": "132:20:0",
+                  "scope": 15,
+                  "src": "147:20:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -301,10 +394,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 7,
+                    "id": 9,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "132:7:0",
+                    "src": "147:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -314,26 +407,53 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "131:22:0"
+              "src": "146:22:0"
             },
             "returnParameters": {
-              "id": 10,
+              "id": 14,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "162:0:0"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15,
+                  "src": "187:4:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 12,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "187:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "186:6:0"
             },
-            "scope": 12,
-            "src": "112:51:0",
+            "scope": 16,
+            "src": "127:66:0",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 13,
-        "src": "24:141:0"
+        "scope": 17,
+        "src": "24:171:0"
       }
     ],
-    "src": "0:165:0"
+    "src": "0:195:0"
   },
   "compiler": {
     "name": "solc",
@@ -341,7 +461,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-01T20:35:54.811Z",
+  "updatedAt": "2020-05-05T12:59:34.779Z",
   "devdoc": {
     "methods": {}
   },

@@ -16,7 +16,7 @@ contract OptionTokenFactory is Cloner {
     address public putTemplate;
     ERC20 public usd;
 
-    event OptionTokenCreated(address token, bool isCall, uint128 expiration, uint128 strike);
+    event OptionTokenCreated(address token, bool indexed isCall, uint128 indexed expiration, uint128 indexed strike);
 
     modifier receiveUSD(uint128 strike, uint128 amount) {
         uint128 cost = amount * strike / 1 ether;

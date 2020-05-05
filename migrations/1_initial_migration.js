@@ -17,12 +17,15 @@ const RLP = require('rlp')
 async function doDeploy(deployer, network) {
 
   let usd
-  if (network.name === 'develop') {
+  console.log(network)
+  if (network === 'develop') {
     usd = await deployer.deploy(DefaultBalanceToken)
-  } else if (network.id === 42) {
-    usd = await ERC20.at('0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa')
-  } else if (network.id === 1) {
+  } else if (network === 'kovan') {
+    usd = await ERC20.at('0x08ae34860fbfe73e223596e65663683973c72dd3')
+  } else if (network === 'main') {
     usd = await ERC20.at('0x6b175474e89094c44da98b954eedeac495271d0f')
+  } else {
+    throw new Error('Network not known')
   }
 
   await deployer.deploy(Migrations)

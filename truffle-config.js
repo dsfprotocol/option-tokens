@@ -54,7 +54,9 @@ module.exports = {
     kovan: {
       provider: () =>
         new HDWalletProvider(mnemonic, "https://kovan.infura.io/v3/ef4d9b9eb0c14c0c939f01ff294bdb22"),
-      network_id: 42 // official id of the ropsten network
+      network_id: 42,
+      skipDryRun: true,
+      gasPrice: 1e9
     }
     // Useful for private networks
     // private: {

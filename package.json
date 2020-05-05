@@ -1,13 +1,12 @@
 {
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "ethereum-checksum-address": "0.0.5",
+    "truffle": "^5.1.13",
     "chai": "^4.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "truffle-core": "^5.0.34",
     "truffle-hdwallet-provider": "^1.0.10"
-  },
-  "devDependencies": {
-    "ethereum-checksum-address": "0.0.5",
-    "truffle": "^5.1.13"
   }
 }

@@ -1,4 +1,5 @@
 const Migrations = artifacts.require("Migrations");
+const ERC20 = artifacts.require('ERC20')
 const ETHCallOptionToken = artifacts.require('ETHCallOptionToken')
 const ETHPutOptionToken = artifacts.require('ETHPutOptionToken')
 const ETHCallOptionTokenProxy = artifacts.require('ETHCallOptionTokenProxy')
@@ -14,9 +15,18 @@ const { toChecksumAddress } = require('ethereum-checksum-address')
 const RLP = require('rlp')
 
 async function doDeploy(deployer, network) {
+
+  let usd
+  if (network.name === 'develop') {
+    usd = await deployer.deploy(DefaultBalanceToken)
+  } else if (network.id === 42) {
+    usd = await ERC20.at('0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa')
+  } else if (network.id === 1) {
+    usd = await ERC20.at('0x6b175474e89094c44da98b954eedeac495271d0f')
+  }
+
   await deployer.deploy(Migrations)
   const dsf = await deployer.deploy(DSFToken)
-  const usd = await deployer.deploy(DefaultBalanceToken)
 
   const sender = deployer.networks[network].from
   const factoryNonce = await web3.eth.getTransactionCount(sender) + 4

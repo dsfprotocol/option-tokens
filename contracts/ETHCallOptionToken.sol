@@ -11,41 +11,7 @@ contract ETHCallOptionToken is OptionToken {
         writers[msg.sender] += msg.value;
         written += msg.value;
         return true;
-    }
-
-    function writeAndApprove(address spender) public payable returns (bool) {
-        write();
-        approve(spender, msg.value);
-        return true;
-    }
-
-    function writeApproveAndCall(address to, bytes memory data) public payable returns (bool) {
-        write();
-        approveAndCall(to, msg.value, data);
-        return true;
-    }
-
-    function writeAsOrigin() public payable returns (bool) {
-        require(now < settlementStart());
-        totalSupply += msg.value;
-        balances[tx.origin] += msg.value;
-        writers[tx.origin] += msg.value;
-        written += msg.value;
-        return true;
-    }
-
-    function writeAndApproveAsOrigin(address to) public payable returns (bool) {
-        writeAsOrigin();
-        approveAsOrigin(to, msg.value);
-        return true;
-    }
-
-    function writeApproveAndCallAsOrigin(address to, bytes memory data) public payable returns (bool) {
-        writeAndApproveAsOrigin(to);
-        (bool result,) = to.call(data);
-        require(result && allowed[tx.origin][to] < msg.value);
-        return true;
-    }
+    }    
 
     function close(uint256 amount) public returns (bool) {
         require(now < settlementStart());

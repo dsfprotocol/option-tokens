@@ -29,27 +29,6 @@ contract ETHPutOptionToken is OptionToken {
         return true;
     }
 
-    function writeAsOrigin(uint256 amount) public returns (bool) {
-        require(now < settlementStart());
-        usd().transferFrom(msg.sender, address(this), amount * strike / 1 ether);
-        totalSupply += amount;
-        balances[tx.origin] += amount;
-        writers[tx.origin] += amount;
-        written += amount;
-    }
-
-    function writeAndApproveAsOrigin(uint256 amount, address to) public returns (bool) {
-        writeAsOrigin(amount);
-        approveAsOrigin(to, amount);
-    }
-
-    function writeApproveAndCallAsOrigin(uint256 amount, address to, bytes memory data) public returns (bool) {
-        writeAndApproveAsOrigin(amount, to);
-        (bool result,) = to.call(data);
-        require(result && allowed[tx.origin][to] < amount);
-        return true;
-    }
-
     function close(uint256 amount) public returns (bool) {
         require(now < settlementStart());
         require(balances[msg.sender] >= amount && writers[msg.sender] >= amount);

@@ -18,7 +18,7 @@ async function doDeploy(deployer, network) {
 
   let usd
   console.log(network)
-  if (network === 'develop') {
+  if (network === 'development') {
     usd = await deployer.deploy(DefaultBalanceToken)
   } else if (network === 'kovan') {
     usd = await ERC20.at('0x08ae34860fbfe73e223596e65663683973c72dd3')
@@ -34,7 +34,7 @@ async function doDeploy(deployer, network) {
   const sender = deployer.networks[network].from
   const factoryNonce = await web3.eth.getTransactionCount(sender) + 4
   console.log('current transaction nonce: ', factoryNonce)
-
+  debugger
   // compute and link address of OptionTokenFactory in advance
   const factoryAddressWillBe = toChecksumAddress(
     "0x" + web3.utils.sha3(RLP.encode([sender,factoryNonce])).slice(12).substring(14)

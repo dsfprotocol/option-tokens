@@ -1,12 +1,19 @@
 {
   "dependencies": {},
   "devDependencies": {
-    "ethereum-checksum-address": "0.0.5",
-    "truffle": "^5.1.13",
     "chai": "^4.2.0",
+    "ethereum-checksum-address": "0.0.5",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
+    "truffle": "^5.1.13",
     "truffle-core": "^5.0.34",
     "truffle-hdwallet-provider": "^1.0.10"
-  }
+  },
+  "name": "option-tokens",
+  "version": "1.0.0",
+  "description": "Options contracts as ERC20 tokens.",
+  "main": "index.js",
+  "repository": "git@github.com:optimum-network/protocol.git",
+  "author": "Brian Wheeler <brianwheeler@Brians-MacBook-Pro.local>",
+  "license": "MIT"
 }

@@ -21,6 +21,7 @@ contract OptionToken is ERC20 {
     uint256 public strike;
 
     mapping(address => uint256) public writers;
+    mapping(address => mapping(address => uint256)) public writersAllowance;
 
     uint256 public exercised;
     uint256 public written;
@@ -28,6 +29,9 @@ contract OptionToken is ERC20 {
     uint256 public settled;
 
     uint256 public constant SETTLEMENT_DURATION = 12 hours;
+
+    event WriterTransfer(address indexed _from, address indexed _to, uint256 _value);
+    event WriterApproval(address indexed _owner, address indexed _spender, uint256 _value);
 
     // called by Factory in same transaction as deploy
     function init(
@@ -49,16 +53,42 @@ contract OptionToken is ERC20 {
         return ERC20(address(USD));
     }
 
-    function approveAsOrigin(address spender, uint256 amount) internal returns (bool) {
-        allowed[tx.origin][spender] = amount;
-        emit Approval(msg.sender, spender, amount);
-        return true;
-    }
-
     function approveAndCall(address spender, uint256 quantity, bytes memory data) public returns (bool) {
         approve(spender, quantity);
         (bool result,) = spender.call(data);
-        require(result && allowed[msg.sender][spender] < quantity);
+        allowed[msg.sender][spender] = 0;
+        require(result);
+        return true;
+    }
+
+    function writerApprove(address _spender, uint256 _value) public returns (bool success) {
+        writersAllowance[msg.sender][_spender] = _value;
+        emit WriterApproval(msg.sender, _spender, _value);
+        return true;
+    }
+
+    function writerTransfer(address to, uint256 amount) public returns (bool) {
+        require(writers[msg.sender] >= amount);
+        writers[msg.sender] -= amount;
+        writers[to] += amount;
+        emit WriterTransfer(msg.sender, to, amount);
+        return true;
+    }
+
+    function writerTransferFrom(address from, address to, uint256 amount) public returns (bool) {
+        require(writers[from] >= amount && writersAllowance[from][msg.sender] >= amount);
+        writers[from] -= amount;
+        writersAllowance[from][from] -= amount;
+        writers[to] += amount;
+        emit WriterTransfer(from, to, amount);
+        return true;
+    }
+
+    function writerApproveAndCall(address spender, uint256 quantity, bytes memory data) public returns (bool) {
+        writerApprove(spender, quantity);
+        (bool result,) = spender.call(data);
+        writersAllowance[msg.sender][spender] = 0;
+        require(result);
         return true;
     }
 

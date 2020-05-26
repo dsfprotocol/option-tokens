@@ -19,8 +19,6 @@ contract OptionTokenFactory is Cloner {
     event OptionTokenCreated(address token, bool indexed isCall, uint128 indexed expiration, uint128 indexed strike);
 
     modifier receiveUSD(uint128 strike, uint128 amount) {
-        uint128 cost = amount * strike / 1 ether;
-        usd.transferFrom(msg.sender, address(this), cost);
         _;
     }
 
@@ -36,36 +34,22 @@ contract OptionTokenFactory is Cloner {
 
     function writeCall(uint128 expiration, uint128 strike) public payable returns (address) {
         ETHCallOptionToken token = findOrCreateCall(expiration, strike);
-        token.writeAsOrigin.value(msg.value)();
-    }
-
-    function writeCallAndApprove(uint128 expiration, uint128 strike, address approve) public payable returns (address) {
-        ETHCallOptionToken token = findOrCreateCall(expiration, strike);
-        token.writeAndApproveAsOrigin.value(msg.value)(approve);
-    }
-
-    function writeCallAndApproveAndCall(uint128 expiration, uint128 strike, address approve, bytes memory data) public payable returns (address) {
-        ETHCallOptionToken token = findOrCreateCall(expiration, strike);
-        token.writeApproveAndCallAsOrigin.value(msg.value)(approve, data);
+        token.write.value(msg.value)();
+        token.transfer(msg.sender, msg.value);
+        token.writerTransfer(msg.sender, msg.value);
     }
 
     function createPut(uint128 expiration, uint128 strike) public returns (address) {
         return address(findOrCreatePut(expiration, strike));
     }
 
-    function writePut(uint128 expiration, uint128 strike, uint128 amount) public receiveUSD(strike, amount) returns (address) {
+    function writePut(uint128 expiration, uint128 strike, uint128 amount) public returns (address) {
         ETHPutOptionToken token = findOrCreatePut(expiration, strike);
-        token.writeAsOrigin(amount);
-    }
-
-    function writePutAndApprove(uint128 expiration, uint128 strike, uint128 amount, address approve) public receiveUSD(strike, amount) returns (address) {
-        ETHPutOptionToken token = findOrCreatePut(expiration, strike);
-        token.writeAndApproveAsOrigin(amount, approve);
-    }
-
-    function writePutApproveAndCall(uint128 expiration, uint128 strike, uint128 amount, address approve, bytes memory data) public returns (address) {
-        ETHPutOptionToken token = findOrCreatePut(expiration, strike);
-        token.writeApproveAndCallAsOrigin(amount, approve, data);
+        uint128 cost = amount * strike / 1 ether;
+        usd.transferFrom(msg.sender, address(this), cost);
+        token.write(amount);
+        token.transfer(msg.sender, amount);
+        token.writerTransfer(msg.sender, amount);
     }
 
     function findOrCreateCall(uint128 expiration, uint128 strike) internal returns (ETHCallOptionToken) {

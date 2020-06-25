@@ -1,15 +1,15 @@
 {
   "contractName": "Cloner",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/Cloner.sol\":\"Cloner\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/Cloner.sol\":{\"keccak256\":\"0x5c06853f1f661ff21eb4971ab045b8f7ec8c1397bd8e93e9c45087f74787ea6b\",\"urls\":[\"bzz-raw://fe4bbec096b808dad975969ba514b93682e9364321aca0e94e275fc7eec14e4f\",\"dweb:/ipfs/QmfLXXEoSeD8c9NL8LLzTUE5fFA3Enyh1nYpwVJfz3Eq7X\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a723158209507645e84d93cb07f696c8d90fcd675e6f9e2502d452c645ae3b19837eb834864736f6c63430005100032",
-  "deployedBytecode": "0x6080604052600080fdfea265627a7a723158209507645e84d93cb07f696c8d90fcd675e6f9e2502d452c645ae3b19837eb834864736f6c63430005100032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Cloner.sol\":\"Cloner\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Cloner.sol\":{\"keccak256\":\"0x5c06853f1f661ff21eb4971ab045b8f7ec8c1397bd8e93e9c45087f74787ea6b\",\"urls\":[\"bzz-raw://fe4bbec096b808dad975969ba514b93682e9364321aca0e94e275fc7eec14e4f\",\"dweb:/ipfs/QmfLXXEoSeD8c9NL8LLzTUE5fFA3Enyh1nYpwVJfz3Eq7X\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820cf440cb15e04d0b662825e8f50b10fad267eac640ddf183f16468e73fbcd7f8164736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820cf440cb15e04d0b662825e8f50b10fad267eac640ddf183f16468e73fbcd7f8164736f6c63430005100032",
   "sourceMap": "24:2441:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:2441:1;;;;;;;",
   "deployedSourceMap": "24:2441:1:-;;;;;",
   "source": "pragma solidity ^0.5;\n\n\ncontract Cloner {\n    function clone(address a) internal returns (address){\n\n        /*\n\n        Assembly of the code that we want to use as init-code in the new contract, \n        along with stack values:\n                        # bottom [ STACK ] top\n        PUSH1 00       # [ 0 ]\n        DUP1           # [ 0, 0 ]\n        PUSH20         \n        <address>      # [0,0, address] \n        DUP1       # [0,0, address ,address]\n        EXTCODESIZE    # [0,0, address, size ]\n        DUP1           # [0,0, address, size, size]\n        SWAP4          # [ size, 0, address, size, 0]\n        DUP1           # [ size, 0, address ,size, 0,0]\n        SWAP2          # [ size, 0, address, 0, 0, size]\n        SWAP3          # [ size, 0, size, 0, 0, address]\n        EXTCODECOPY    # [ size, 0]\n        RETURN \n\n        The code above weighs in at 33 bytes, which is _just_ above fitting into a uint. \n        So a modified version is used, where the initial PUSH1 00 is replaced by `PC`. \n        This is one byte smaller, and also a bit cheaper Wbase instead of Wverylow. It only costs 2 gas.\n\n        PC             # [ 0 ]\n        DUP1           # [ 0, 0 ]\n        PUSH20         \n        <address>      # [0,0, address] \n        DUP1       # [0,0, address ,address]\n        EXTCODESIZE    # [0,0, address, size ]\n        DUP1           # [0,0, address, size, size]\n        SWAP4          # [ size, 0, address, size, 0]\n        DUP1           # [ size, 0, address ,size, 0,0]\n        SWAP2          # [ size, 0, address, 0, 0, size]\n        SWAP3          # [ size, 0, size, 0, 0, address]\n        EXTCODECOPY    # [ size, 0]\n        RETURN \n\n        The opcodes are:\n        58 80 73 <address> 80 3b 80 93 80 91 92 3c F3\n        We get <address> in there by OR:ing the upshifted address into the 0-filled space. \n        5880730000000000000000000000000000000000000000803b80938091923cF3 \n        +000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx000000000000000000\n        -----------------------------------------------------------------\n        588073xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx00000803b80938091923cF3\n\n        This is simply stored at memory position 0, and create is invoked. \n\n        */\n        address retval;\n        assembly{\n            mstore(0x0, or (0x5880730000000000000000000000000000000000000000803b80938091923cF3 ,mul(a,0x1000000000000000000)))\n            retval := create(0,0, 32)\n        }\n        return retval;\n    }\n}",
-  "sourcePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Cloner.sol",
+  "sourcePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Cloner.sol",
   "ast": {
-    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Cloner.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Cloner.sol",
     "exportedSymbols": {
       "Cloner": [
         33
@@ -221,7 +221,7 @@
     "src": "0:2465:1"
   },
   "legacyAST": {
-    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Cloner.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Cloner.sol",
     "exportedSymbols": {
       "Cloner": [
         33
@@ -437,8 +437,8 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-05-05T12:59:34.781Z",
+  "schemaVersion": "3.1.0",
+  "updatedAt": "2020-05-15T16:04:34.770Z",
   "devdoc": {
     "methods": {}
   },

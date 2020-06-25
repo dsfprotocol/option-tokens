@@ -23,15 +23,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"optionTokenWasCloned\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/ProxyInterface.sol\":\"ProxyInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/ProxyInterface.sol\":{\"keccak256\":\"0x7f31ab525df18d85d5ce8d7e726c6696bffca3841fb3aaf1309fa91fcdb00840\",\"urls\":[\"bzz-raw://ae11da5a1342f28791001b3b2dac7dfaf08db2c9af9f2c05d96af108651dffb4\",\"dweb:/ipfs/QmeicDqTqK5seESoL8Jv4dryDcx2QA65enUe335wY61byc\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"optionTokenWasCloned\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/option-tokens/contracts/ProxyInterface.sol\":\"ProxyInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/option-tokens/contracts/ProxyInterface.sol\":{\"keccak256\":\"0x7f31ab525df18d85d5ce8d7e726c6696bffca3841fb3aaf1309fa91fcdb00840\",\"urls\":[\"bzz-raw://ae11da5a1342f28791001b3b2dac7dfaf08db2c9af9f2c05d96af108651dffb4\",\"dweb:/ipfs/QmeicDqTqK5seESoL8Jv4dryDcx2QA65enUe335wY61byc\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5;\n\n\ncontract ProxyInterface {\n    function optionTokenWasCloned(address token) public returns (bool);\n}",
-  "sourcePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/ProxyInterface.sol",
+  "sourcePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/ProxyInterface.sol",
   "ast": {
-    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/ProxyInterface.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/ProxyInterface.sol",
     "exportedSymbols": {
       "ProxyInterface": [
         4510
@@ -153,7 +153,7 @@
     "src": "0:123:14"
   },
   "legacyAST": {
-    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/ProxyInterface.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/ProxyInterface.sol",
     "exportedSymbols": {
       "ProxyInterface": [
         4510
@@ -279,8 +279,8 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-05-05T12:59:34.935Z",
+  "schemaVersion": "3.1.0",
+  "updatedAt": "2020-05-15T16:04:34.870Z",
   "devdoc": {
     "methods": {}
   },

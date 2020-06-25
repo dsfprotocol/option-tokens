@@ -44,15 +44,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"expectingUSD\",\"type\":\"uint256\"}],\"name\":\"receiveETH\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"expectingETH\",\"type\":\"uint256\"}],\"name\":\"receiveUSD\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol\":\"Auction\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol\":{\"keccak256\":\"0xb85f67ca3ab72d6ec79896a3acc2c7f853a373506a72b67c3550c3bfc9d96084\",\"urls\":[\"bzz-raw://2ab4e87e778af4619fc3cbcc51100777500d466620b8d2aa9e380f6e68fab252\",\"dweb:/ipfs/QmZXWtF1ViuqW8pgqg9agyHG6EBPCSnPsekRVZyvVXXKG1\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"expectingUSD\",\"type\":\"uint256\"}],\"name\":\"receiveETH\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"expectingETH\",\"type\":\"uint256\"}],\"name\":\"receiveUSD\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Auction.sol\":\"Auction\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Auction.sol\":{\"keccak256\":\"0xb85f67ca3ab72d6ec79896a3acc2c7f853a373506a72b67c3550c3bfc9d96084\",\"urls\":[\"bzz-raw://2ab4e87e778af4619fc3cbcc51100777500d466620b8d2aa9e380f6e68fab252\",\"dweb:/ipfs/QmZXWtF1ViuqW8pgqg9agyHG6EBPCSnPsekRVZyvVXXKG1\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5;\n\n\ninterface Auction {\n    function receiveETH(uint256 expectingUSD) external payable returns (bool);\n    function receiveUSD(uint256 expectingETH) external returns (bool);\n}",
-  "sourcePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol",
+  "sourcePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Auction.sol",
   "ast": {
-    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Auction.sol",
     "exportedSymbols": {
       "Auction": [
         16
@@ -254,7 +254,7 @@
     "src": "0:195:0"
   },
   "legacyAST": {
-    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Auction.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Auction.sol",
     "exportedSymbols": {
       "Auction": [
         16
@@ -460,8 +460,8 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-05-05T12:59:34.779Z",
+  "schemaVersion": "3.1.0",
+  "updatedAt": "2020-05-15T16:04:34.766Z",
   "devdoc": {
     "methods": {}
   },

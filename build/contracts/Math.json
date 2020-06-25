@@ -1,15 +1,15 @@
 {
   "contractName": "Math",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/Math.sol\":\"Math\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/protocol/contracts/Math.sol\":{\"keccak256\":\"0x68ef30e62745ab3242aa55bda53611553a0106a69ffe048ed29894ef9bdc6719\",\"urls\":[\"bzz-raw://1eab30b1417bf2c6493246316a0179826aedacae4c15b8a290d43be0769eea4b\",\"dweb:/ipfs/Qma75UXc61jCxqqAV9q1EzNQadFH88cfNY7BE6mUhxNEtb\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820efc4b97b2e01c92f56b3969d42f79b43f9529fff42aa0ef4239b52d3608237cd64736f6c63430005100032",
-  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820efc4b97b2e01c92f56b3969d42f79b43f9529fff42aa0ef4239b52d3608237cd64736f6c63430005100032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Math.sol\":\"Math\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Math.sol\":{\"keccak256\":\"0x68ef30e62745ab3242aa55bda53611553a0106a69ffe048ed29894ef9bdc6719\",\"urls\":[\"bzz-raw://1eab30b1417bf2c6493246316a0179826aedacae4c15b8a290d43be0769eea4b\",\"dweb:/ipfs/Qma75UXc61jCxqqAV9q1EzNQadFH88cfNY7BE6mUhxNEtb\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820d1a1f05c25dc141605fe496b33493813b72f60ffa65cba81dc3e3082fabb23be64736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820d1a1f05c25dc141605fe496b33493813b72f60ffa65cba81dc3e3082fabb23be64736f6c63430005100032",
   "sourceMap": "24:294:9:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;24:294:9;;;;;;;",
   "deployedSourceMap": "24:294:9:-;;;;;",
   "source": "pragma solidity ^0.5;\n\n\ncontract Math {\n    function min(uint256 a, uint256 b) internal pure returns (uint256) {\n        if (a < b)\n            return a;\n        return b;\n    }\n\n    function max(uint256 a, uint256 b) internal pure returns (uint256) {\n        if (a > b)\n            return a;\n        return b;\n    }\n}",
-  "sourcePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Math.sol",
+  "sourcePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Math.sol",
   "ast": {
-    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Math.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Math.sol",
     "exportedSymbols": {
       "Math": [
         3295
@@ -453,7 +453,7 @@
     "src": "0:318:9"
   },
   "legacyAST": {
-    "absolutePath": "/Users/brianwheeler/dsfprotocol/protocol/contracts/Math.sol",
+    "absolutePath": "/Users/brianwheeler/dsfprotocol/option-tokens/contracts/Math.sol",
     "exportedSymbols": {
       "Math": [
         3295
@@ -901,8 +901,8 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.23",
-  "updatedAt": "2020-05-05T12:59:34.873Z",
+  "schemaVersion": "3.1.0",
+  "updatedAt": "2020-05-15T16:04:34.830Z",
   "devdoc": {
     "methods": {}
   },

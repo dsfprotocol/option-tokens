@@ -23,9 +23,9 @@ contract ETHPutOptionToken is OptionToken {
         approve(spender, msg.value);
     }
 
-    function writeApproveAndCall(uint256 amount, address to, bytes memory data) public returns (bool) {
+    function writeReceiveAndCall(uint256 amount, address to, bytes memory data) public returns (bool) {
         write(amount);
-        approveAndCall(to, amount, data);
+        receiveAndCall(to, amount, data);
         return true;
     }
 

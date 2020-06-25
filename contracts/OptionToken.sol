@@ -20,8 +20,10 @@ contract OptionToken is ERC20 {
     uint256 public expiration;
     uint256 public strike;
 
+    mapping(address => mapping(address => uint256)) public receivals;
     mapping(address => uint256) public writers;
-    mapping(address => mapping(address => uint256)) public writersAllowance;
+    mapping(address => mapping(address => uint256)) public writerAllowance;
+    mapping(address => mapping(address => uint256)) public writerReceivals;
 
     uint256 public exercised;
     uint256 public written;
@@ -53,16 +55,24 @@ contract OptionToken is ERC20 {
         return ERC20(address(USD));
     }
 
-    function approveAndCall(address spender, uint256 quantity, bytes memory data) public returns (bool) {
-        approve(spender, quantity);
-        (bool result,) = spender.call(data);
-        allowed[msg.sender][spender] = 0;
+    function receiveAndCall(address receiver, uint256 quantity, bytes memory data) public returns (bool) {
+        receivals[msg.sender][receiver] = quantity;
+        (bool result,) = receiver.call(data);
+        receivals[msg.sender][receiver] = 0;
         require(result);
         return true;
     }
 
+    function receiveFrom(address from, address to, uint256 quantity) public returns (bool) {
+        require(receivals[from][msg.sender] >= quantity && balances[from] >= quantity);
+        balances[from] -= quantity;
+        receivals[from][msg.sender] -= quantity;
+        balances[to] += quantity;
+        emit Transfer(from, to, quantity);
+    }
+
     function writerApprove(address _spender, uint256 _value) public returns (bool success) {
-        writersAllowance[msg.sender][_spender] = _value;
+        writerAllowance[msg.sender][_spender] = _value;
         emit WriterApproval(msg.sender, _spender, _value);
         return true;
     }
@@ -76,20 +86,28 @@ contract OptionToken is ERC20 {
     }
 
     function writerTransferFrom(address from, address to, uint256 amount) public returns (bool) {
-        require(writers[from] >= amount && writersAllowance[from][msg.sender] >= amount);
+        require(writers[from] >= amount && writerAllowance[from][msg.sender] >= amount);
         writers[from] -= amount;
-        writersAllowance[from][from] -= amount;
+        writerAllowance[from][from] -= amount;
         writers[to] += amount;
         emit WriterTransfer(from, to, amount);
         return true;
     }
 
-    function writerApproveAndCall(address spender, uint256 quantity, bytes memory data) public returns (bool) {
-        writerApprove(spender, quantity);
-        (bool result,) = spender.call(data);
-        writersAllowance[msg.sender][spender] = 0;
+    function writerReceiveAndCall(address receiver, uint256 quantity, bytes memory data) public returns (bool) {
+        writerReceivals[msg.sender][receiver] = quantity;
+        (bool result,) = receiver.call(data);
+        writerReceivals[msg.sender][receiver] = 0;
         require(result);
         return true;
+    }
+
+    function writerReceiveFrom(address from, address to, uint256 quantity) public returns (bool) {
+        require(writerReceivals[from][msg.sender] >= quantity && balances[from] >= quantity);
+        balances[from] -= quantity;
+        writerReceivals[from][msg.sender] -= quantity;
+        balances[to] += quantity;
+        emit WriterTransfer(from, to, quantity);
     }
 
     function edge(address account) public view returns (uint256) {

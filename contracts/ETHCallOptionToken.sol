@@ -11,7 +11,18 @@ contract ETHCallOptionToken is OptionToken {
         writers[msg.sender] += msg.value;
         written += msg.value;
         return true;
-    }    
+    }
+
+    function writeAndApprove(address spender) public payable returns (bool) {
+        write();
+        approve(spender, msg.value);
+    }
+
+    function writeReceiveAndCall(address to, bytes memory data) public payable returns (bool) {
+        write();
+        receiveAndCall(to, msg.value, data);
+        return true;
+    }
 
     function close(uint256 amount) public returns (bool) {
         require(now < settlementStart());

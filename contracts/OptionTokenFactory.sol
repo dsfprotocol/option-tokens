@@ -28,31 +28,7 @@ contract OptionTokenFactory is Cloner {
         usd = ERC20(address(USD));
     }
 
-    function createCall(uint128 expiration, uint128 strike) public returns (address) {
-        return address(findOrCreateCall(expiration, strike));
-    }
-
-    function writeCall(uint128 expiration, uint128 strike) public payable returns (address) {
-        ETHCallOptionToken token = findOrCreateCall(expiration, strike);
-        token.write.value(msg.value)();
-        token.transfer(msg.sender, msg.value);
-        token.writerTransfer(msg.sender, msg.value);
-    }
-
-    function createPut(uint128 expiration, uint128 strike) public returns (address) {
-        return address(findOrCreatePut(expiration, strike));
-    }
-
-    function writePut(uint128 expiration, uint128 strike, uint128 amount) public returns (address) {
-        ETHPutOptionToken token = findOrCreatePut(expiration, strike);
-        uint128 cost = amount * strike / 1 ether;
-        usd.transferFrom(msg.sender, address(this), cost);
-        token.write(amount);
-        token.transfer(msg.sender, amount);
-        token.writerTransfer(msg.sender, amount);
-    }
-
-    function findOrCreateCall(uint128 expiration, uint128 strike) internal returns (ETHCallOptionToken) {
+    function findOrCreateCall(uint128 expiration, uint128 strike) public returns (ETHCallOptionToken) {
         require(expiration > now && expiration % 86400 - 43200 == 0 && strike % 5 ether == 0 && strike > 0 ether && strike < 100000 ether);
         address token = calls[expiration][strike];
         if (token == address(0)) {
@@ -65,7 +41,7 @@ contract OptionTokenFactory is Cloner {
         return ETHCallOptionToken(token);
     }
 
-    function findOrCreatePut(uint128 expiration, uint128 strike) internal returns (ETHPutOptionToken) {
+    function findOrCreatePut(uint128 expiration, uint128 strike) public returns (ETHPutOptionToken) {
         require(expiration > now && expiration % 86400 - 43200 == 0 && strike % 5 ether == 0 && strike > 0 ether && strike < 100000 ether);
         address token = puts[expiration][strike];
         if (token == address(0)) {
@@ -77,6 +53,22 @@ contract OptionTokenFactory is Cloner {
 
         emit OptionTokenCreated(token, false, expiration, strike);
         return ETHPutOptionToken(token);
+    }
+
+    function writeCall(uint128 expiration, uint128 strike) public payable returns (address) {
+        ETHCallOptionToken token = findOrCreateCall(expiration, strike);
+        token.write.value(msg.value)();
+        token.transfer(msg.sender, msg.value);
+        token.writerTransfer(msg.sender, msg.value);
+    }
+
+    function writePut(uint128 expiration, uint128 strike, uint128 amount) public returns (address) {
+        ETHPutOptionToken token = findOrCreatePut(expiration, strike);
+        uint128 cost = amount * strike / 1 ether;
+        usd.transferFrom(msg.sender, address(this), cost);
+        token.write(amount);
+        token.transfer(msg.sender, amount);
+        token.writerTransfer(msg.sender, amount);
     }
 
     function getTokenName(bool isCall, uint256 expiration, uint256 strike) pure external returns (string memory) {

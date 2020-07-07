@@ -18,10 +18,6 @@ contract OptionTokenFactory is Cloner {
 
     event OptionTokenCreated(address token, bool indexed isCall, uint128 indexed expiration, uint128 indexed strike);
 
-    modifier receiveUSD(uint128 strike, uint128 amount) {
-        _;
-    }
-
     constructor() public {
         callTemplate = address(new ETHCallOptionTokenProxy());
         putTemplate = address(new ETHPutOptionTokenProxy());

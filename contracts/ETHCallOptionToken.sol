@@ -72,7 +72,7 @@ contract ETHCallOptionToken is OptionToken {
 
 
     /** Allows the holder of an option-token to claim automatically exercised funds
-        afte settlement has ended.
+        after settlement has ended.
      */
     function liquidate() public returns (bool) {
         require(now > settlementEnd());

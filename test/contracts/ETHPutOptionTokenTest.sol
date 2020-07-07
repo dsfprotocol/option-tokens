@@ -2,8 +2,8 @@ pragma solidity ^0.5;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/OptionTokenFactory.sol";
-import "../contracts/ETHPutOptionToken.sol";
+import "../../contracts/OptionTokenFactory.sol";
+import "../../contracts/ETHPutOptionToken.sol";
 import "default-balance-token/DefaultBalanceToken.sol";
 
 

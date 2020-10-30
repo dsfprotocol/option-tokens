@@ -34,6 +34,7 @@ contract OptionToken is ERC20 {
             _transferBase(amount);
         }
         balances[msg.sender] += amount;
+        writers[msg.sender] += amount;
     }
 
     function close(uint256 amount) public {

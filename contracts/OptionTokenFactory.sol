@@ -9,7 +9,5 @@ contract OptionTokenFactory {
     constructor(address _base, address _underlying) {
         base = _base;
         underlying = _underlying;
-    }
-
-    
+    }    
 }

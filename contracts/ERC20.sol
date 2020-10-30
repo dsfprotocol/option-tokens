@@ -1,59 +1,58 @@
-pragma solidity ^0.5;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.7;
 
 
 contract ERC20 {
-    uint256 constant public MAX_UINT256 = 2**256 - 1;
-    mapping(address => uint) public balances;
-    mapping(address => mapping(address => uint)) public allowed;
 
-    uint8 public constant decimals = 18;
-
-    /**
-        Name and symbol have been removed, because they are computed variables.
-        They are not stored in the option token.
-     */
-
-    // string public name;
-    // string public symbol;
-
-    uint public totalSupply;
+    uint256 constant private MAX_UINT256 = 2**256 - 1;
+    mapping (address => uint256) public balances;
+    mapping (address => mapping (address => uint256)) public allowed;
+    uint256 public totalSupply;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 
-    event Created(address creator, uint supply);
-
-    function balanceOf(address _owner) public view returns (uint256 balance) {
-        return balances[_owner];
-    }
-
-    function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
-        return allowed[_owner][_spender];
-    }
+    /*
+    NOTE:
+    The following variables are OPTIONAL vanities. One does not have to include them.
+    They allow one to customise the token contract & in no way influences the core functionality.
+    Some wallets/interfaces might not even bother to look at this information.
+    */    
+    string public name;                   //fancy name: eg Simon Bucks
+    uint8 public decimals;                //How many decimals to show.
+    string public symbol;                 //An identifier: eg SBX
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
         require(balances[msg.sender] >= _value);
         balances[msg.sender] -= _value;
         balances[_to] += _value;
-        emit Transfer(msg.sender, _to, _value);
+        emit Transfer(msg.sender, _to, _value); //solhint-disable-line indent, no-unused-vars
         return true;
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        uint256 allow = allowed[_from][msg.sender];
-        require(balances[_from] >= _value && allow >= _value);
-        balances[_from] -= _value;
+        uint256 allowance = allowed[_from][msg.sender];
+        require(balances[_from] >= _value && allowance >= _value);
         balances[_to] += _value;
-        if (allow < MAX_UINT256) {
+        balances[_from] -= _value;
+        if (allowance < MAX_UINT256) {
             allowed[_from][msg.sender] -= _value;
         }
-        emit Transfer(_from, _to, _value);
+        emit Transfer(_from, _to, _value); //solhint-disable-line indent, no-unused-vars
         return true;
+    }
+
+    function balanceOf(address _owner) public view returns (uint256 balance) {
+        return balances[_owner];
     }
 
     function approve(address _spender, uint256 _value) public returns (bool success) {
         allowed[msg.sender][_spender] = _value;
-        emit Approval(msg.sender, _spender, _value);
+        emit Approval(msg.sender, _spender, _value); //solhint-disable-line indent, no-unused-vars
         return true;
+    }
+
+    function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
+        return allowed[_owner][_spender];
     }
 }
